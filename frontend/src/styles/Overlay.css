@@ -1,0 +1,56 @@
+.overlayContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.overlayBackground {
+    background-color: black;
+    opacity: 0.4;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+}
+
+.overlay {
+    background-color: white;
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
+    position: fixed;
+    padding: 0 20px 20px 20px;
+    z-index: 6;
+}
+
+.overlayTitle {
+    background-color: aquamarine;
+    width: calc(100% + 36px);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: -20px;
+    padding: 2px;
+    font-weight: bold;
+}
+
+.overlayButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+
+    button {
+        background-color: aquamarine;
+    }
+}
+
+.overlayContent {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}

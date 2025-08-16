@@ -1,0 +1,16 @@
+.navigation {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    background-color: aquamarine;
+    width: 100vw;
+    height: fit-content;
+}
+
+.navButton {
+    background-color: transparent;
+}
+
+.logout {
+    margin-left: auto;
+}

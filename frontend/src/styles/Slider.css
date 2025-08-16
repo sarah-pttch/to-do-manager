@@ -1,0 +1,26 @@
+.sliderContainer {
+    width: 90vw;
+    height: fit-content;
+    margin: auto;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    background-color: rgba(226, 161, 7, .5);
+}
+
+.sliderTitle {
+    background-color: rgba(226, 161, 7, 1);
+    font-weight: bold;
+    padding: 2px;
+    margin: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.slideContainer {
+    background-color: darkolivegreen;
+    padding: 20px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}

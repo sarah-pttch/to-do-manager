@@ -1,0 +1,16 @@
+.listContainer {
+    width: 90vw;
+    height: fit-content;
+    margin: auto;
+    padding-bottom: 16px;
+    border-radius: 5px;
+    background-color: rgba(121, 167, 5, .5);
+}
+
+.listTitle {
+    background-color: rgba(121, 167, 5, 1);
+    font-weight: bold;
+    padding: 2px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
