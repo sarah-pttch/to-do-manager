@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -14,7 +14,7 @@ public class ToDo {
     private Integer id;
     private String title;
     private String category;
-    private Date deadline;
+    private LocalDate deadline;
 
     public Integer getId() {
         return id;
@@ -36,11 +36,11 @@ public class ToDo {
         this.category = category;
     }
 
-    public Date getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 

@@ -1,13 +1,13 @@
 package com.example.backend.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class ToDoDto {
     private Integer id;
     private String title;
     private String category;
-    private Date deadline;
+    private LocalDate deadline;
 
     public Integer getId() {
         return id;
@@ -33,11 +33,11 @@ public class ToDoDto {
         this.category = category;
     }
 
-    public Date getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 

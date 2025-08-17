@@ -15,7 +15,7 @@ export default function Overlay({ isOpen, overlayTitle, buttonTitle, onClose, on
                         </div>
                         <div className='overlayButtons'>
                             <button onClick={onClose}>{buttonTitle}</button>
-                            <button onClick={onSave}>Save</button>
+                            <button type='submit' onClick={onSave}>Save</button>
                         </div>
                     </div>
                 </div>
