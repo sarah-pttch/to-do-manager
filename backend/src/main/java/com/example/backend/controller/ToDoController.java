@@ -17,7 +17,27 @@ public class ToDoController {
 
     @PostMapping
     public ResponseEntity<ToDoDto> createToDo(@RequestBody ToDoDto toDoDto) {
-        System.out.println("method is running");
         return new ResponseEntity<>(toDoService.createToDo(toDoDto), HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<Iterable<ToDoDto>> getAllToDos() {
+        return new ResponseEntity<>(toDoService.getAllToDos(), HttpStatus.OK);
+    }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<ToDoDto> getToDoById(@PathVariable Integer id) {
+//        return new ResponseEntity<>(toDoService.getToDoById(id), HttpStatus.FOUND);
+//    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ToDoDto> updateToDo(@PathVariable Integer id, @RequestBody ToDoDto toDoDto) {
+        return new ResponseEntity<>(toDoService.updateToDo(id, toDoDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteToDo(@PathVariable Integer id) {
+        toDoService.deleteToDo(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

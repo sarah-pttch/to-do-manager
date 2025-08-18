@@ -10,7 +10,11 @@ const api = axios.create({
 })
 
 export const toDoService = {
-    create: (data) => api.post('', data)
+    create: (data) => api.post('', data),
+    getAll: () => api.get(''),
+    getById: (id) => api.get(`/${id}`),
+    update: (id, data) => api.put(`/${id}`, data),
+    delete: (id) => api.delete(`/${id}`)
 }
 
 export default api;
