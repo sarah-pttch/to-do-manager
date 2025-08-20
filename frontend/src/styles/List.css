@@ -14,3 +14,12 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
+
+.listItem {
+    display: flex;
+    flex-direction: row;
+}
+
+.itemDeadline {
+    margin-left: auto;
+}

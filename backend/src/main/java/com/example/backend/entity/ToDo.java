@@ -16,6 +16,14 @@ public class ToDo {
     private String category;
     private LocalDate deadline;
 
+    public ToDo() {}
+
+    public ToDo(String title, String category, LocalDate deadline) {
+        this.title = title;
+        this.category = category;
+        this.deadline = deadline;
+    }
+
     public Integer getId() {
         return id;
     }
