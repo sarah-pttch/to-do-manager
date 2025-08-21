@@ -23,7 +23,7 @@ function App() {
         <Navigation />
         <CreateOverlay onAdd={retrieveData}/>
         <Slider></Slider>
-        <List data={toDos}/>
+        <List data={toDos} onUpdate={retrieveData}/>
     </>
   )
 }

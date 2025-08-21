@@ -10,7 +10,7 @@
 .sliderTitle {
     background-color: rgba(226, 161, 7, 1);
     font-weight: bold;
-    padding: 2px;
+    padding: 2px 2px 2px 4px;
     margin: 0;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;

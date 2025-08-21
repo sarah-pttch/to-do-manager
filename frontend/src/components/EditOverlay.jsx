@@ -1,24 +1,30 @@
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import Overlay from './Overlay.jsx'
 import { toDoService } from '../services/api.jsx'
 
-export default function CreateOverlay({ onAdd }) {
-    const [isOverlayOpen, setIsOverlayOpen] = useState(false)
+export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOverlayOpen, onUpdate }) {
     const [title, setTitle] = useState('')
     const [category, setCategory] = useState('')
     const [deadline, setDeadline] = useState('')
 
+    useEffect(() => {
+        setTitle(item.title);
+        setCategory(item.category);
+        setDeadline(item.deadline);
+    }, [item]);
+
     const handleSubmit = async () => {
         try {
-            await toDoService.create({title, category, deadline})
+            await toDoService.update(item.id, {title, category, deadline})
             setTitle('')
             setCategory('')
             setDeadline('')
             setIsOverlayOpen(!isOverlayOpen)
-            onAdd();
-            alert("ToDo created successfully")
+            closePreview(false);
+            onUpdate();
+            alert("ToDo updated successfully")
         } catch(error) {
-            alert("Error creating ToDo: " + error)
+            alert("Error updating ToDo: " + error)
         }
     }
     // placeholder when backend not running
@@ -31,10 +37,9 @@ export default function CreateOverlay({ onAdd }) {
 
     return (
         <>
-            <button onClick={() => setIsOverlayOpen(!isOverlayOpen)}>Open Overlay</button>
             <Overlay
                 isOpen={isOverlayOpen}
-                overlayTitle={'Create a new ToDo'}
+                overlayTitle={'Edit ToDo'}
                 buttonTitle={'Save'}
                 onClose={() => {
                     setIsOverlayOpen(!isOverlayOpen)

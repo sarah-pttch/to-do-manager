@@ -22,6 +22,9 @@
     position: fixed;
     padding: 0 20px 20px 20px;
     z-index: 6;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .overlayTitle {
@@ -32,7 +35,7 @@
     margin-top: 0;
     margin-bottom: 0;
     margin-left: -20px;
-    padding: 2px;
+    padding: 2px 2px 2px 3px;
     font-weight: bold;
 }
 
@@ -53,4 +56,8 @@
     gap: 3px;
     padding-top: 10px;
     padding-bottom: 20px;
+}
+
+input {
+    margin: 1px;
 }
