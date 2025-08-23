@@ -51,6 +51,7 @@ export default function List({ data, onUpdate }) {
                     <p className='previewTitle'>{previewItem.title}</p>
                     <p className='preview'>Category: {previewItem.category}</p>
                     <p className='preview'>Deadline: {previewItem.deadline}</p>
+                    <p className='preview'>Notes: {previewItem.notes}</p>
                     <button className='edit' onClick={edit}>Edit ToDo</button>
                     <button className='close' onClick={close}>X</button>
                     <EditOverlay item={previewItem} closePreview={setPreviewVisible} isOverlayOpen={isOverlayOpen} setIsOverlayOpen={setIsOverlayOpen} onUpdate={onUpdate}/>

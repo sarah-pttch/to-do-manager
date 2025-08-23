@@ -5,9 +5,11 @@ import java.util.Objects;
 
 public class ToDoDto {
     private Integer id;
+    private String status = "open";
     private String title;
     private String category;
     private LocalDate deadline;
+    private String notes;
 
     public Integer getId() {
         return id;
@@ -15,6 +17,14 @@ public class ToDoDto {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getTitle() {
@@ -41,16 +51,24 @@ public class ToDoDto {
         this.deadline = deadline;
     }
 
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ToDoDto toDoDto = (ToDoDto) o;
-        return Objects.equals(id, toDoDto.id) && Objects.equals(title, toDoDto.title) && Objects.equals(category, toDoDto.category) && Objects.equals(deadline, toDoDto.deadline);
+        return Objects.equals(id, toDoDto.id) && Objects.equals(status, toDoDto.status) && Objects.equals(title, toDoDto.title) && Objects.equals(category, toDoDto.category) && Objects.equals(deadline, toDoDto.deadline) && Objects.equals(notes, toDoDto.notes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, category, deadline);
+        return Objects.hash(id, status, title, category, deadline, notes);
     }
 }

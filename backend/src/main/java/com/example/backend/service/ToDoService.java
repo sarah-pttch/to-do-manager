@@ -38,6 +38,7 @@ public class ToDoService {
 //    }
 
     public ToDoDto updateToDo(Integer id, ToDoDto toDoDto) {
+        toDoDto.setStatus("open");
         ToDo inputToDo = ToDoMapper.toEntity(toDoDto);
         Optional<ToDo> tempToDo = toDoRepository.findById(id);
         if(tempToDo.isEmpty()) {

@@ -6,19 +6,22 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
     const [title, setTitle] = useState('')
     const [category, setCategory] = useState('')
     const [deadline, setDeadline] = useState('')
+    const [notes, setNotes] = useState('')
 
     useEffect(() => {
         setTitle(item.title);
         setCategory(item.category);
         setDeadline(item.deadline);
+        setNotes(item.notes);
     }, [item]);
 
     const handleSubmit = async () => {
         try {
-            await toDoService.update(item.id, {title, category, deadline})
+            await toDoService.update(item.id, {title, category, deadline, notes})
             setTitle('')
             setCategory('')
             setDeadline('')
+            setNotes('')
             setIsOverlayOpen(!isOverlayOpen)
             closePreview(false);
             onUpdate();
@@ -52,6 +55,8 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
                 <input id='category' type='text' value={category} onChange={(e) => setCategory(e.target.value)}/>
                 <label>Deadline: </label>
                 <input id='deadline' type='date' value={deadline} onChange={(e) => setDeadline(e.target.value)}/>
+                <label>Notes:</label>
+                <textarea id='notes' rows="5" cols="50" value={notes} onChange={(e) => setNotes(e.target.value)}/>
             </Overlay>
         </>
     )

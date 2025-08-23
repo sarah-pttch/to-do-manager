@@ -20,10 +20,10 @@ public class DataLoader {
 
     @PostConstruct
     private void loadData() {
-        toDoRepository.save(new ToDo("Nr1", "Important", LocalDate.of(2025, 8, 30)));
-        toDoRepository.save(new ToDo("Nr2", "Urgent", LocalDate.of(2025, 8, 25)));
-        toDoRepository.save(new ToDo("Nr3", "LowPrio", LocalDate.of(2025, 12, 5)));
-        toDoRepository.save(new ToDo("Nr4", "Sprint1", LocalDate.of(2025, 9, 15)));
-        toDoRepository.save(new ToDo("Nr5", "Sprint1", LocalDate.of(2025, 9, 17)));
+        toDoRepository.save(new ToDo("Nr1", "Important", LocalDate.of(2025, 8, 30), ""));
+        toDoRepository.save(new ToDo("Nr2", "Urgent", LocalDate.of(2025, 8, 25), "to be finished urgently"));
+        toDoRepository.save(new ToDo("Nr3", "LowPrio", LocalDate.of(2025, 12, 5), "consult literature"));
+        toDoRepository.save(new ToDo("Nr4", "Sprint1", LocalDate.of(2025, 9, 15), ""));
+        toDoRepository.save(new ToDo("Nr5", "Sprint1", LocalDate.of(2025, 9, 17), "lalalalala"));
     }
 }
