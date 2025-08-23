@@ -62,8 +62,9 @@
 
 .edit {
     background-color: rgba(121, 167, 5, 1);
-    margin-top: auto;
-    margin-left: auto;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }
 
 .close {
