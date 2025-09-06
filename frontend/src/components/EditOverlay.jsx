@@ -17,7 +17,7 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
 
     const handleSubmit = async () => {
         try {
-            await toDoService.update(item.id, {title, category, deadline, notes})
+            await toDoService.update(item.id, {status: "open", title, category, deadline, notes})
             setTitle('')
             setCategory('')
             setDeadline('')
@@ -30,13 +30,6 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
             alert("Error updating ToDo: " + error)
         }
     }
-    // placeholder when backend not running
-    // const handleSubmit = () => {
-    //     setTitle('')
-    //     setCategory('')
-    //     setDeadline('')
-    //     setIsOverlayOpen(!isOverlayOpen)
-    // }
 
     return (
         <>

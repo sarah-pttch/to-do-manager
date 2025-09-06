@@ -1,6 +1,7 @@
 import '../styles/List.css'
-import {useState} from "react";
+import { useState } from "react";
 import EditOverlay from "./EditOverlay.jsx";
+import { toDoService } from "../services/api.jsx";
 
 export default function List({ data, onUpdate }) {
 
@@ -15,10 +16,16 @@ export default function List({ data, onUpdate }) {
             setPreviewItem(dataItem);
         }
 
+        const daysUntilDeadline = (deadline) => {
+            const today = new Date();
+            const toDoDate = new Date(deadline);
+            return Math.round((toDoDate - today) / 86400000);
+        }
+
         return (
             <li className='listItem' onClick={() => handleClick(dataItem)}>
                 <div>{dataItem.title}</div>
-                <div className='itemDeadline'>{dataItem.deadline}</div>
+                <div className='itemDeadline'>{dataItem.deadline} ({daysUntilDeadline(dataItem.deadline)} days left)</div>
             </li>
         )
     }
@@ -28,7 +35,17 @@ export default function List({ data, onUpdate }) {
     }
 
     const edit = () => {
-        setIsOverlayOpen(!isOverlayOpen)
+        setIsOverlayOpen(!isOverlayOpen);
+    }
+
+    const handleCheckOff = async () => {
+        try {
+            await toDoService.update(previewItem.id, {status: "done", title: previewItem.title, category: previewItem.category, deadline: previewItem.deadline, notes: previewItem.notes});
+        } catch(error) {
+            alert("Error updating ToDo: " + error)
+        }
+        setPreviewVisible(false);
+        onUpdate();
     }
 
     if (data.length === 0) return (
@@ -43,7 +60,8 @@ export default function List({ data, onUpdate }) {
             <p className='listTitle'>List of ToDos</p>
             <div className='listContent'>
                 <div className='listItemsContainer'>
-                    {data.map((item, index) => (
+                    {data.filter(item => item && item.status === "open")
+                        .map((item, index) => (
                         <ListItem key={index} dataItem={item}/>
                     ))}
                 </div>
@@ -52,7 +70,10 @@ export default function List({ data, onUpdate }) {
                     <p className='preview'>Category: {previewItem.category}</p>
                     <p className='preview'>Deadline: {previewItem.deadline}</p>
                     <p className='preview'>Notes: {previewItem.notes}</p>
-                    <button className='edit' onClick={edit}>Edit ToDo</button>
+                    <div className='buttonContainer'>
+                        <button className='edit' onClick={edit}>Edit ToDo</button>
+                        <button className='done' onClick={handleCheckOff}>Mark as done</button>
+                    </div>
                     <button className='close' onClick={close}>X</button>
                     <EditOverlay item={previewItem} closePreview={setPreviewVisible} isOverlayOpen={isOverlayOpen} setIsOverlayOpen={setIsOverlayOpen} onUpdate={onUpdate}/>
                 </div>

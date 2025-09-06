@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class ToDoDto {
     private Integer id;
-    private String status = "open";
+    private String status;
     private String title;
     private String category;
     private LocalDate deadline;

@@ -11,7 +11,7 @@ export default function CreateOverlay({ onAdd }) {
 
     const handleSubmit = async () => {
         try {
-            await toDoService.create({title, category, deadline, notes})
+            await toDoService.create({status: "open", title, category, deadline, notes})
             setTitle('')
             setCategory('')
             setDeadline('')
@@ -23,13 +23,6 @@ export default function CreateOverlay({ onAdd }) {
             alert("Error creating ToDo: " + error)
         }
     }
-    // placeholder when backend not running
-    // const handleSubmit = () => {
-    //     setTitle('')
-    //     setCategory('')
-    //     setDeadline('')
-    //     setIsOverlayOpen(!isOverlayOpen)
-    // }
 
     return (
         <>

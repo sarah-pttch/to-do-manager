@@ -62,9 +62,6 @@
 
 .edit {
     background-color: rgba(121, 167, 5, 1);
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
 }
 
 .close {
@@ -75,6 +72,18 @@
     height: 25px;
     width: 25px;
     padding: 0;
+}
+
+.done {
+    background-color: rgba(121, 167, 5, 1);
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }
 
 .listItem {

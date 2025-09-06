@@ -9,7 +9,7 @@ function Slide({ dataItem, days }) {
             <p className='slideTitle'>{dataItem.title}</p>
             { nrDays === 1
                 ? <p>Deadline in {nrDays} day</p>
-                : <p>Deadline in {nrDays} days</p>
+                : <p className={nrDays < 0 && 'red'}>Deadline in {nrDays} days</p>
             }
         </div>
     )
@@ -25,14 +25,14 @@ export default function Slider({ data }) {
 
     const deadlineSoon = (deadline) => {
         const difference = daysUntilDeadline(deadline);
-        return difference >= 0 && difference < 7;
+        return difference < 7;
     }
 
     return (
         <div className='sliderContainer'>
             <p className='sliderTitle'>Deadline ending soon</p>
             <div className='sliderContent'>
-                {data.filter(item => item && deadlineSoon(item.deadline))
+                {data.filter(item => item && item.status === "open" && deadlineSoon(item.deadline))
                     .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
                     .map((item, index) => (
                         <Slide key={index} dataItem={item} days={daysUntilDeadline(item.deadline)}/>

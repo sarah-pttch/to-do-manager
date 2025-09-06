@@ -12,7 +12,7 @@ public class ToDo {
     @Id
     @GeneratedValue
     private Integer id;
-    private String status = "open";
+    private String status;
     private String title;
     private String category;
     private LocalDate deadline;
@@ -21,6 +21,15 @@ public class ToDo {
     public ToDo() {}
 
     public ToDo(String title, String category, LocalDate deadline, String notes) {
+        this.status = "open";
+        this.title = title;
+        this.category = category;
+        this.deadline = deadline;
+        this.notes = notes;
+    }
+
+    public ToDo(String status, String title, String category, LocalDate deadline, String notes) {
+        this.status = status;
         this.title = title;
         this.category = category;
         this.deadline = deadline;
