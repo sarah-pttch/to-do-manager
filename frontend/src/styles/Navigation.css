@@ -9,6 +9,10 @@
 
 .navButton {
     background-color: transparent;
+
+    &.active {
+        background-color: rgb(80, 218, 172);
+    }
 }
 
 .logout {

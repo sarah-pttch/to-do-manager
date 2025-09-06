@@ -1,30 +1,21 @@
-import './App.css'
+// import './App.css'
 import Navigation from './components/Navigation.jsx'
-import Slider from './components/Slider.jsx'
-import List from './components/List.jsx'
-import CreateOverlay from "./components/CreateOverlay.jsx";
-import {useEffect, useState} from "react";
-import { toDoService } from "./services/api.jsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Overview from "./routes/Overview.jsx";
+import Settings from "./routes/Settings.jsx";
+import Calendar from "./routes/Calendar.jsx";
 
 function App() {
 
-    const [toDos, setToDos] = useState([]);
-    const retrieveData = async () => {
-        const data = await toDoService.getAll();
-        setToDos(data.data)
-    }
-
-    useEffect(() => {
-        retrieveData();
-    }, []);
-
   return (
-    <>
+    <BrowserRouter>
         <Navigation />
-        <CreateOverlay onAdd={retrieveData}/>
-        <Slider data={toDos}></Slider>
-        <List data={toDos} onUpdate={retrieveData}/>
-    </>
+        <Routes>
+            <Route path="/" element={<Overview />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/settings" element={<Settings />} />
+        </Routes>
+    </BrowserRouter>
   )
 }
 
