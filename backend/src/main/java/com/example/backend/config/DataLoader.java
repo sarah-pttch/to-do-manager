@@ -1,6 +1,8 @@
 package com.example.backend.config;
 
+import com.example.backend.entity.Category;
 import com.example.backend.entity.ToDo;
+import com.example.backend.repository.CategoryRepository;
 import com.example.backend.repository.ToDoRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,12 @@ import java.time.LocalDate;
 public class DataLoader {
 
     private final ToDoRepository toDoRepository;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
-    public DataLoader(ToDoRepository toDoRepository) {
+    public DataLoader(ToDoRepository toDoRepository, CategoryRepository categoryRepository) {
         this.toDoRepository = toDoRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @PostConstruct
@@ -25,5 +29,10 @@ public class DataLoader {
         toDoRepository.save(new ToDo("Nr3", "LowPrio", LocalDate.of(2025, 12, 5), "consult literature"));
         toDoRepository.save(new ToDo("Nr4", "Sprint1", LocalDate.of(2025, 9, 15), ""));
         toDoRepository.save(new ToDo("Nr5", "Sprint1", LocalDate.of(2025, 9, 17), "lalalalala"));
+
+        categoryRepository.save(new Category("Urgent"));
+        categoryRepository.save(new Category("Low priority"));
+        categoryRepository.save(new Category("Q1"));
+        categoryRepository.save(new Category("Project A"));
     }
 }
