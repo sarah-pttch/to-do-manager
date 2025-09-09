@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Overlay from './Overlay.jsx'
-import { toDoService } from '../services/api.jsx'
+import { toDoService } from '../services/toToApi.jsx'
 
-export default function CreateOverlay({ onAdd }) {
+export default function CreateOverlay({ onAdd, categories }) {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false)
     const [title, setTitle] = useState('')
     const [category, setCategory] = useState('')
@@ -39,7 +39,12 @@ export default function CreateOverlay({ onAdd }) {
                 <label>Title: </label>
                 <input id='title' type='text' value={title} onChange={(e) => setTitle(e.target.value)} />
                 <label>Category: </label>
-                <input id='category' type='text' value={category} onChange={(e) => setCategory(e.target.value)} />
+                <select id='category' value={category} onChange={(e) => setCategory(e.target.value)}>
+                    <option></option>
+                    {categories.map((item) => (
+                        <option value={item.name}>{item.name}</option>
+                    ))}
+                </select>
                 <label>Deadline: </label>
                 <input id='deadline' type='date' value={deadline} onChange={(e) => setDeadline(e.target.value)} />
                 <label>Notes:</label>

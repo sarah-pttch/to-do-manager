@@ -1,0 +1,55 @@
+.categoriesContainer {
+    width: 30vw;
+    height: fit-content;
+    margin: 20px auto auto auto;
+    border-radius: 5px;
+    background-color: rgba(121, 167, 5, .5);
+}
+
+.title {
+    background-color: rgba(121, 167, 5, 1);
+    font-weight: bold;
+    padding: 2px 2px 2px 4px;
+    margin: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 16px 10px 16px 10px;
+}
+
+.categoryItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: darkgreen 2px solid;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.categoryName {
+    margin: 0;
+}
+
+.remove {
+    background-color: rgba(121, 167, 5, 1);
+    height: 25px;
+    width: 25px;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.overlayButton {
+    background-color: rgba(121, 167, 5, 1);
+    border-radius: 5px;
+}

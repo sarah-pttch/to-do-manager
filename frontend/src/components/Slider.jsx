@@ -9,7 +9,7 @@ function Slide({ dataItem, days }) {
             <p className='slideTitle'>{dataItem.title}</p>
             { nrDays === 1
                 ? <p>Deadline in {nrDays} day</p>
-                : <p className={nrDays < 0 && 'red'}>Deadline in {nrDays} days</p>
+                : <p className={nrDays < 0 ? 'red' : undefined}>Deadline in {nrDays} days</p>
             }
         </div>
     )

@@ -23,13 +23,13 @@
 }
 
 .slideContainer {
+    width: 200px;
     border: chocolate 2px solid;
     border-radius: 5px;
     padding: 20px;
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    width: fit-content;
 }
 
 .slideTitle {

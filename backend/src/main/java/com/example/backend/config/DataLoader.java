@@ -24,11 +24,11 @@ public class DataLoader {
 
     @PostConstruct
     private void loadData() {
-        toDoRepository.save(new ToDo("Nr1", "Important", LocalDate.of(2025, 8, 30), ""));
+        toDoRepository.save(new ToDo("Nr1", "Project A", LocalDate.of(2025, 8, 30), ""));
         toDoRepository.save(new ToDo("Nr2", "Urgent", LocalDate.of(2025, 8, 25), "to be finished urgently"));
-        toDoRepository.save(new ToDo("Nr3", "LowPrio", LocalDate.of(2025, 12, 5), "consult literature"));
-        toDoRepository.save(new ToDo("Nr4", "Sprint1", LocalDate.of(2025, 9, 15), ""));
-        toDoRepository.save(new ToDo("Nr5", "Sprint1", LocalDate.of(2025, 9, 17), "lalalalala"));
+        toDoRepository.save(new ToDo("Nr3", "Low priority", LocalDate.of(2025, 12, 5), "consult literature"));
+        toDoRepository.save(new ToDo("Nr4", "Q1", LocalDate.of(2025, 9, 15), ""));
+        toDoRepository.save(new ToDo("Nr5", "Q1", LocalDate.of(2025, 9, 17), "lalalalala"));
 
         categoryRepository.save(new Category("Urgent"));
         categoryRepository.save(new Category("Low priority"));

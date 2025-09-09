@@ -1,9 +1,9 @@
 import '../styles/List.css'
-import { useState } from "react";
-import EditOverlay from "./EditOverlay.jsx";
-import { toDoService } from "../services/api.jsx";
+import { useState } from "react"
+import EditOverlay from "./EditOverlay.jsx"
+import { toDoService } from "../services/toToApi.jsx"
 
-export default function List({ data, onUpdate }) {
+export default function List({ data, onUpdate, categories }) {
 
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewItem, setPreviewItem] = useState([]);
@@ -75,7 +75,7 @@ export default function List({ data, onUpdate }) {
                         <button className='done' onClick={handleCheckOff}>Mark as done</button>
                     </div>
                     <button className='close' onClick={close}>X</button>
-                    <EditOverlay item={previewItem} closePreview={setPreviewVisible} isOverlayOpen={isOverlayOpen} setIsOverlayOpen={setIsOverlayOpen} onUpdate={onUpdate}/>
+                    <EditOverlay item={previewItem} closePreview={setPreviewVisible} isOverlayOpen={isOverlayOpen} setIsOverlayOpen={setIsOverlayOpen} onUpdate={onUpdate} categories={categories}/>
                 </div>
             </div>
         </div>
