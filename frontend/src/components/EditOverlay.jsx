@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Overlay from './Overlay.jsx'
-import { toDoService } from '../services/toToApi.jsx'
+import { taskService } from '../services/taskApi.jsx'
 
 export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOverlayOpen, onUpdate, categories }) {
     const [title, setTitle] = useState('')
@@ -17,7 +17,7 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
 
     const handleSubmit = async () => {
         try {
-            await toDoService.update(item.id, {status: "open", title, category, deadline, notes})
+            await taskService.update(item.id, {status: "open", title, category, deadline, notes})
             setTitle('')
             setCategory('')
             setDeadline('')
@@ -25,9 +25,9 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
             setIsOverlayOpen(!isOverlayOpen)
             closePreview(false);
             onUpdate();
-            alert("ToDo updated successfully")
+            alert("Task updated successfully")
         } catch(error) {
-            alert("Error updating ToDo: " + error)
+            alert("Error updating task: " + error)
         }
     }
 
@@ -35,7 +35,7 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
         <>
             <Overlay
                 isOpen={isOverlayOpen}
-                overlayTitle={'Edit ToDo'}
+                overlayTitle={'Edit task'}
                 buttonTitle={'Save'}
                 onClose={() => {
                     setIsOverlayOpen(!isOverlayOpen)

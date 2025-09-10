@@ -1,7 +1,7 @@
 import '../styles/List.css'
 import { useState } from "react"
 import EditOverlay from "./EditOverlay.jsx"
-import { toDoService } from "../services/toToApi.jsx"
+import { taskService } from "../services/taskApi.jsx"
 
 export default function List({ data, onUpdate, categories }) {
 
@@ -18,8 +18,8 @@ export default function List({ data, onUpdate, categories }) {
 
         const daysUntilDeadline = (deadline) => {
             const today = new Date();
-            const toDoDate = new Date(deadline);
-            return Math.round((toDoDate - today) / 86400000);
+            const taskDate = new Date(deadline);
+            return Math.round((taskDate - today) / 86400000);
         }
 
         return (
@@ -40,9 +40,9 @@ export default function List({ data, onUpdate, categories }) {
 
     const handleCheckOff = async () => {
         try {
-            await toDoService.update(previewItem.id, {status: "done", title: previewItem.title, category: previewItem.category, deadline: previewItem.deadline, notes: previewItem.notes});
+            await taskService.update(previewItem.id, {status: "done", title: previewItem.title, category: previewItem.category, deadline: previewItem.deadline, notes: previewItem.notes});
         } catch(error) {
-            alert("Error updating ToDo: " + error)
+            alert("Error updating task: " + error)
         }
         setPreviewVisible(false);
         onUpdate();
@@ -50,14 +50,14 @@ export default function List({ data, onUpdate, categories }) {
 
     if (data.length === 0) return (
         <div className='listContainer'>
-            <p className='listTitle'>List of ToDos</p>
-            <div>No ToDos. Good job!</div>
+            <p className='listTitle'>List of tasks</p>
+            <div>No open tasks. Good job!</div>
         </div>
     )
 
     return (
         <div className='listContainer'>
-            <p className='listTitle'>List of ToDos</p>
+            <p className='listTitle'>List of tasks</p>
             <div className='listContent'>
                 <div className='listItemsContainer'>
                     {data.filter(item => item && item.status === "open")

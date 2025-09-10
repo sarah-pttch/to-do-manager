@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_BASE_URL = 'http://localhost:8080/todos'
+const API_BASE_URL = 'http://localhost:8080/tasks'
 const api = axios.create({
     baseURL: API_BASE_URL,
     headers: {
@@ -9,7 +9,7 @@ const api = axios.create({
     withCredentials: false
 })
 
-export const toDoService = {
+export const taskService = {
     create: (data) => api.post('', data),
     getAll: () => api.get(''),
     getById: (id) => api.get(`/${id}`),

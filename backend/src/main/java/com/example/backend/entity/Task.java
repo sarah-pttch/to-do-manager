@@ -1,15 +1,40 @@
-package com.example.backend.dto;
+package com.example.backend.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class ToDoDto {
+@Entity
+public class Task {
+    @Id
+    @GeneratedValue
     private Integer id;
     private String status;
     private String title;
     private String category;
     private LocalDate deadline;
     private String notes;
+
+    public Task() {}
+
+    public Task(String title, String category, LocalDate deadline, String notes) {
+        this.status = "open";
+        this.title = title;
+        this.category = category;
+        this.deadline = deadline;
+        this.notes = notes;
+    }
+
+    public Task(String status, String title, String category, LocalDate deadline, String notes) {
+        this.status = status;
+        this.title = title;
+        this.category = category;
+        this.deadline = deadline;
+        this.notes = notes;
+    }
 
     public Integer getId() {
         return id;
@@ -63,8 +88,8 @@ public class ToDoDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ToDoDto toDoDto = (ToDoDto) o;
-        return Objects.equals(id, toDoDto.id) && Objects.equals(status, toDoDto.status) && Objects.equals(title, toDoDto.title) && Objects.equals(category, toDoDto.category) && Objects.equals(deadline, toDoDto.deadline) && Objects.equals(notes, toDoDto.notes);
+        Task task = (Task) o;
+        return Objects.equals(id, task.id) && Objects.equals(status, task.status) && Objects.equals(title, task.title) && Objects.equals(category, task.category) && Objects.equals(deadline, task.deadline) && Objects.equals(notes, task.notes);
     }
 
     @Override

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Overlay from './Overlay.jsx'
-import { toDoService } from '../services/toToApi.jsx'
+import { taskService } from '../services/taskApi.jsx'
 
 export default function CreateOverlay({ onAdd, categories }) {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false)
@@ -11,16 +11,16 @@ export default function CreateOverlay({ onAdd, categories }) {
 
     const handleSubmit = async () => {
         try {
-            await toDoService.create({status: "open", title, category, deadline, notes})
+            await taskService.create({status: "open", title, category, deadline, notes})
             setTitle('')
             setCategory('')
             setDeadline('')
             setNotes('')
             setIsOverlayOpen(!isOverlayOpen)
             onAdd();
-            alert("ToDo created successfully")
+            alert("Task created successfully")
         } catch(error) {
-            alert("Error creating ToDo: " + error)
+            alert("Error creating task: " + error)
         }
     }
 
@@ -29,7 +29,7 @@ export default function CreateOverlay({ onAdd, categories }) {
             <button onClick={() => setIsOverlayOpen(!isOverlayOpen)}>Open Overlay</button>
             <Overlay
                 isOpen={isOverlayOpen}
-                overlayTitle={'Create a new ToDo'}
+                overlayTitle={'Create a new task'}
                 buttonTitle={'Save'}
                 onClose={() => {
                     setIsOverlayOpen(!isOverlayOpen)

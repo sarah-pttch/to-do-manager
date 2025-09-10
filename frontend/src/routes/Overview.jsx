@@ -2,16 +2,16 @@ import Slider from '../components/Slider.jsx'
 import List from '../components/List.jsx'
 import CreateOverlay from "../components/CreateOverlay.jsx";
 import { useEffect, useState } from "react";
-import { toDoService } from "../services/toToApi.jsx";
-import {categoriesService} from "../services/categoriesApi.jsx";
+import { taskService } from "../services/taskApi.jsx";
+import { categoriesService } from "../services/categoriesApi.jsx";
 
 export default function Overview() {
 
-    const [toDos, setToDos] = useState([]);
+    const [tasks, setTasks] = useState([]);
     const [categories, setCategories] = useState([]);
     const retrieveData = async () => {
-        const toDoData = await toDoService.getAll();
-        setToDos(toDoData.data);
+        const taskData = await taskService.getAll();
+        setTasks(taskData.data);
         const categoryData = await categoriesService.getAll();
         setCategories(categoryData.data);
     }
@@ -23,8 +23,8 @@ export default function Overview() {
     return (
         <>
             <CreateOverlay onAdd={retrieveData} categories={categories} />
-            <Slider data={toDos} />
-            <List data={toDos} onUpdate={retrieveData} categories={categories} />
+            <Slider data={tasks} />
+            <List data={tasks} onUpdate={retrieveData} categories={categories} />
         </>
     )
 }

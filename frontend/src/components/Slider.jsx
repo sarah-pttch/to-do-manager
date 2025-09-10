@@ -19,8 +19,8 @@ export default function Slider({ data }) {
 
     const daysUntilDeadline = (deadline) => {
         const today = new Date();
-        const toDoDate = new Date(deadline);
-        return (toDoDate - today) / 86400000;
+        const taskDate = new Date(deadline);
+        return (taskDate - today) / 86400000;
     }
 
     const deadlineSoon = (deadline) => {
