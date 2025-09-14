@@ -3,8 +3,10 @@
     flex-direction: row;
     gap: 5px;
     background-color: aquamarine;
-    width: 100vw;
+    width: 100%;
     height: fit-content;
+    position: sticky;
+    top: 0;
 }
 
 .navButton {

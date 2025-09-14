@@ -71,7 +71,7 @@ export default function List({ data, onUpdate, categories }) {
                     <p className='preview'>Deadline: {previewItem.deadline}</p>
                     <p className='preview'>Notes: {previewItem.notes}</p>
                     <div className='buttonContainer'>
-                        <button className='edit' onClick={edit}>Edit ToDo</button>
+                        <button className='edit' onClick={edit}>Edit Task</button>
                         <button className='done' onClick={handleCheckOff}>Mark as done</button>
                     </div>
                     <button className='close' onClick={close}>X</button>

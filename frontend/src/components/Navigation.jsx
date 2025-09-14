@@ -17,8 +17,13 @@ export default function Navigation() {
         navigate('/calendar');
     }
 
-    const toSettings = () => {
+    const toArchive = () => {
         setActivePage(2);
+        navigate('/archive');
+    }
+
+    const toSettings = () => {
+        setActivePage(3);
         navigate('/settings');
     }
 
@@ -26,7 +31,8 @@ export default function Navigation() {
         <div className='navigation' style={{display: 'flex', flexDirection: 'row'}}>
             <button className={`navButton ${activePage === 0 ? 'active' : ''}`} onClick={toOverview}>Overview</button>
             <button className={`navButton ${activePage === 1 ? 'active' : ''}`} onClick={toCalendar}>Calendar</button>
-            <button className={`navButton ${activePage === 2 ? 'active' : ''}`} onClick={toSettings}>Settings</button>
+            <button className={`navButton ${activePage === 2 ? 'active' : ''}`} onClick={toArchive}>Archive</button>
+            <button className={`navButton ${activePage === 3 ? 'active' : ''}`} onClick={toSettings}>Settings</button>
             <button className='navButton logout'>Logout</button>
         </div>
     )

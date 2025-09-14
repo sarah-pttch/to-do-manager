@@ -12,6 +12,7 @@ const api = axios.create({
 export const taskService = {
     create: (data) => api.post('', data),
     getAll: () => api.get(''),
+    getArchive: () => api.get('/completed'),
     getById: (id) => api.get(`/${id}`),
     update: (id, data) => api.put(`/${id}`, data),
     delete: (id) => api.delete(`/${id}`)

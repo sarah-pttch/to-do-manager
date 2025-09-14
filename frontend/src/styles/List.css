@@ -98,6 +98,15 @@
     cursor: pointer;
 }
 
+.archiveListItem {
+    display: flex;
+    flex-direction: row;
+    border: darkgreen 2px solid;
+    border-radius: 5px;
+    padding: 10px;
+    justify-content: space-between;
+}
+
 .itemDeadline {
     margin-left: auto;
 }
