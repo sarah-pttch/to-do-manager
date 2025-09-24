@@ -32,7 +32,7 @@ export default function Slider({ data }) {
         <div className='sliderContainer'>
             <p className='sliderTitle'>Deadline ending soon</p>
             <div className='sliderContent'>
-                {data.filter(item => item && item.status === "open" && deadlineSoon(item.deadline))
+                {data.filter(item => item && deadlineSoon(item.deadline))
                     .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
                     .map((item, index) => (
                         <Slide key={index} dataItem={item} days={daysUntilDeadline(item.deadline)}/>

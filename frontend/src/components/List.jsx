@@ -40,7 +40,14 @@ export default function List({ data, onUpdate, categories }) {
 
     const handleCheckOff = async () => {
         try {
-            await taskService.update(previewItem.id, {status: "done", title: previewItem.title, category: previewItem.category, deadline: previewItem.deadline, notes: previewItem.notes});
+            await taskService.update(previewItem.id, {
+                status: "done",
+                creationDate: previewItem.creationDate,
+                title: previewItem.title,
+                category: previewItem.category,
+                deadline: previewItem.deadline,
+                notes: previewItem.notes
+            });
         } catch(error) {
             alert("Error updating task: " + error)
         }
@@ -60,8 +67,7 @@ export default function List({ data, onUpdate, categories }) {
             <p className='listTitle'>List of tasks</p>
             <div className='listContent'>
                 <div className='listItemsContainer'>
-                    {data.filter(item => item && item.status === "open")
-                        .map((item, index) => (
+                    {data.map((item, index) => (
                         <ListItem key={index} dataItem={item}/>
                     ))}
                 </div>
@@ -70,6 +76,7 @@ export default function List({ data, onUpdate, categories }) {
                     <p className='preview'>Category: {previewItem.category}</p>
                     <p className='preview'>Deadline: {previewItem.deadline}</p>
                     <p className='preview'>Notes: {previewItem.notes}</p>
+
                     <div className='buttonContainer'>
                         <button className='edit' onClick={edit}>Edit Task</button>
                         <button className='done' onClick={handleCheckOff}>Mark as done</button>

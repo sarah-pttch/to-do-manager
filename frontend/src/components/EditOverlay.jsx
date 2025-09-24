@@ -17,7 +17,14 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
 
     const handleSubmit = async () => {
         try {
-            await taskService.update(item.id, {status: "open", title, category, deadline, notes})
+            await taskService.update(item.id, {
+                status: "open",
+                creationDate: item.creationDate,
+                title,
+                category,
+                deadline,
+                notes
+            })
             setTitle('')
             setCategory('')
             setDeadline('')
@@ -47,8 +54,8 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
                 <label>Category: </label>
                 <select id='category' value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option></option>
-                    {categories.map((item) => (
-                        <option value={item.name}>{item.name}</option>
+                    {categories.map((item, index) => (
+                        <option key={index} value={item.name}>{item.name}</option>
                     ))}
                 </select>
                 <label>Deadline: </label>

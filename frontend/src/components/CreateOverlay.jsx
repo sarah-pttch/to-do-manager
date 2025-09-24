@@ -11,7 +11,7 @@ export default function CreateOverlay({ onAdd, categories }) {
 
     const handleSubmit = async () => {
         try {
-            await taskService.create({status: "open", title, category, deadline, notes})
+            await taskService.create({title, category, deadline, notes})
             setTitle('')
             setCategory('')
             setDeadline('')

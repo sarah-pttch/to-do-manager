@@ -7,6 +7,7 @@ import com.example.backend.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -22,6 +23,8 @@ public class TaskService {
     }
 
     public TaskDto createTask(TaskDto taskDto) {
+        taskDto.setStatus("open");
+        taskDto.setCreationDate(LocalDate.now());
         Task createdTask = taskRepository.save(TaskMapper.toEntity(taskDto));
         return TaskMapper.toDto(createdTask);
     }
@@ -44,6 +47,9 @@ public class TaskService {
 //    }
 
     public TaskDto updateTask(Integer id, TaskDto taskDto) {
+        if(taskDto.getStatus().equals("done")) {
+            taskDto.setCompletionDate(LocalDate.now());
+        }
         Task inputTask = TaskMapper.toEntity(taskDto);
         Optional<Task> tempTask = taskRepository.findById(id);
         if(tempTask.isEmpty()) {
