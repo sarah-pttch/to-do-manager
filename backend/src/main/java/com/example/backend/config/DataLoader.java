@@ -27,11 +27,11 @@ public class DataLoader {
 
     @PostConstruct
     private void loadData() {
-        taskRepository.save(new Task("Nr1", "Project A", LocalDate.of(2025, 8, 30), "", Collections.emptyList()));
-        taskRepository.save(new Task("Nr2", "Urgent", LocalDate.of(2025, 8, 25), "to be finished urgently", Collections.emptyList()));
+        taskRepository.save(new Task("Nr1", "Project A", LocalDate.of(2025, 9, 30), "", Collections.emptyList()));
+        taskRepository.save(new Task("Nr2", "Urgent", LocalDate.of(2025, 9, 25), "to be finished urgently", Collections.emptyList()));
         taskRepository.save(new Task("Nr3", "Low priority", LocalDate.of(2025, 12, 5), "consult literature", Collections.emptyList()));
-        taskRepository.save(new Task("Nr4", "Q1", LocalDate.of(2025, 9, 15), "", Collections.emptyList()));
-        taskRepository.save(new Task("Nr5", "Q1", LocalDate.of(2025, 9, 17), "lalalalala", Collections.emptyList()));
+        taskRepository.save(new Task("Nr4", "Q1", LocalDate.of(2025, 10, 15), "", Collections.emptyList()));
+        taskRepository.save(new Task("Nr5", "Q1", LocalDate.of(2025, 10, 17), "lalalalala", Collections.emptyList()));
 
         categoryRepository.save(new Category("Urgent"));
         categoryRepository.save(new Category("Low priority"));

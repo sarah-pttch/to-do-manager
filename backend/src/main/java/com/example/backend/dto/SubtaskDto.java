@@ -1,30 +1,14 @@
-package com.example.backend.entity;
+package com.example.backend.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+import com.example.backend.entity.Task;
 
 import java.util.Objects;
 
-@Entity
-public class Subtask {
-    @Id
-    @GeneratedValue
+public class SubtaskDto {
     private Integer id;
     private String status;
     private String description;
-
-    @ManyToOne
-    @JoinColumn(name = "task_id")
-    @JsonBackReference
     private Task task;
-
-    public Subtask() {}
-
-    public Subtask(String description, Task task) {
-        this.status = "open";
-        this.description = description;
-        this.task = task;
-    }
 
     public Integer getId() {
         return id;
@@ -62,18 +46,18 @@ public class Subtask {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Subtask subtask = (Subtask) o;
-        return Objects.equals(id, subtask.id) && Objects.equals(status, subtask.status) && Objects.equals(description, subtask.description);
+        SubtaskDto that = (SubtaskDto) o;
+        return Objects.equals(id, that.id) && Objects.equals(status, that.status) && Objects.equals(description, that.description) && Objects.equals(task, that.task);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, status, description);
+        return Objects.hash(id, status, description, task);
     }
 
     @Override
     public String toString() {
-        return "Subtask{" +
+        return "SubtaskDto{" +
                 "id=" + id +
                 ", status='" + status + '\'' +
                 ", description='" + description + '\'' +

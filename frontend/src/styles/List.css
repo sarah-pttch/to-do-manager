@@ -58,27 +58,42 @@
 
 .preview {
     margin: 0;
+    display: flex;
+    gap: 4px;
+
+    &.centered {
+        align-items: center;
+    }
 }
 
-.edit {
+.subtasksContainer {
+    padding-left: 20px;
+
+    input {
+        margin-right: 2px;
+    }
+}
+
+.actionButton {
     background-color: rgba(121, 167, 5, 1);
     border-radius: 5px;
+    height: 30px;
+    width: 30px;
+    padding: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.close {
-    background-color: rgba(121, 167, 5, 1);
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    height: 25px;
-    width: 25px;
+.plusButton {
+    background-color: transparent;
+    border-radius: 5px;
+    height: 20px;
+    width: 20px;
     padding: 0;
-    border-radius: 5px;
-}
-
-.done {
-    background-color: rgba(121, 167, 5, 1);
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .buttonContainer {
@@ -86,7 +101,7 @@
     gap: 10px;
     position: absolute;
     right: 10px;
-    bottom: 10px;
+    top: 10px;
 }
 
 .listItem {
