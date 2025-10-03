@@ -9,7 +9,7 @@ public class SubtaskMapper {
         dto.setId(subtask.getId());
         dto.setStatus(subtask.getStatus());
         dto.setDescription(subtask.getDescription());
-        dto.setTask(subtask.getTask());
+        dto.setTaskId(subtask.getTaskId());
         return dto;
     }
 
@@ -17,7 +17,7 @@ public class SubtaskMapper {
         Subtask subtask = new Subtask();
         subtask.setStatus(dto.getStatus());
         subtask.setDescription(dto.getDescription());
-        subtask.setTask(dto.getTask());
+        subtask.setTaskId(dto.getTaskId());
         return subtask;
     }
 }

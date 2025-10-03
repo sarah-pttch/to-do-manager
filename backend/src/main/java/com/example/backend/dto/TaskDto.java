@@ -1,9 +1,6 @@
 package com.example.backend.dto;
 
-import com.example.backend.entity.Subtask;
-
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 public class TaskDto {
@@ -15,7 +12,6 @@ public class TaskDto {
     private String category;
     private LocalDate deadline;
     private String notes;
-    private List<Subtask> subtasks;
 
     public Integer getId() {
         return id;
@@ -81,24 +77,16 @@ public class TaskDto {
         this.notes = notes;
     }
 
-    public List<Subtask> getSubtasks() {
-        return subtasks;
-    }
-
-    public void setSubtasks(List<Subtask> subtasks) {
-        this.subtasks = subtasks;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TaskDto taskDto = (TaskDto) o;
-        return Objects.equals(id, taskDto.id) && Objects.equals(status, taskDto.status) && Objects.equals(creationDate, taskDto.creationDate) && Objects.equals(completionDate, taskDto.completionDate) && Objects.equals(title, taskDto.title) && Objects.equals(category, taskDto.category) && Objects.equals(deadline, taskDto.deadline) && Objects.equals(notes, taskDto.notes) && Objects.equals(subtasks, taskDto.subtasks);
+        return Objects.equals(id, taskDto.id) && Objects.equals(status, taskDto.status) && Objects.equals(creationDate, taskDto.creationDate) && Objects.equals(completionDate, taskDto.completionDate) && Objects.equals(title, taskDto.title) && Objects.equals(category, taskDto.category) && Objects.equals(deadline, taskDto.deadline) && Objects.equals(notes, taskDto.notes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, status, creationDate, completionDate, title, category, deadline, notes, subtasks);
+        return Objects.hash(id, status, creationDate, completionDate, title, category, deadline, notes);
     }
 }

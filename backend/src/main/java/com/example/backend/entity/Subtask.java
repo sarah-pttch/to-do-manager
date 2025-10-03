@@ -1,6 +1,5 @@
 package com.example.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -12,18 +11,14 @@ public class Subtask {
     private Integer id;
     private String status;
     private String description;
-
-    @ManyToOne
-    @JoinColumn(name = "task_id")
-    @JsonBackReference
-    private Task task;
+    private Integer taskId;
 
     public Subtask() {}
 
-    public Subtask(String description, Task task) {
+    public Subtask(String description, Integer taskId) {
         this.status = "open";
         this.description = description;
-        this.task = task;
+        this.taskId = taskId;
     }
 
     public Integer getId() {
@@ -50,12 +45,12 @@ public class Subtask {
         this.description = description;
     }
 
-    public Task getTask() {
-        return task;
+    public Integer getTaskId() {
+        return taskId;
     }
 
-    public void setTask(Task task) {
-        this.task = task;
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
     }
 
     @Override
@@ -63,21 +58,11 @@ public class Subtask {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Subtask subtask = (Subtask) o;
-        return Objects.equals(id, subtask.id) && Objects.equals(status, subtask.status) && Objects.equals(description, subtask.description);
+        return Objects.equals(id, subtask.id) && Objects.equals(status, subtask.status) && Objects.equals(description, subtask.description) && Objects.equals(taskId, subtask.taskId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, status, description);
-    }
-
-    @Override
-    public String toString() {
-        return "Subtask{" +
-                "id=" + id +
-                ", status='" + status + '\'' +
-                ", description='" + description + '\'' +
-                ", task=" + task +
-                '}';
+        return Objects.hash(id, status, description, taskId);
     }
 }

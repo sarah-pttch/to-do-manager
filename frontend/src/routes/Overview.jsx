@@ -1,9 +1,9 @@
 import Slider from '../components/Slider.jsx'
 import List from '../components/List.jsx'
-import CreateOverlay from "../components/CreateOverlay.jsx";
-import { useEffect, useState } from "react";
-import { taskService } from "../services/taskApi.jsx";
-import { categoriesService } from "../services/categoriesApi.jsx";
+import CreateOverlay from "../components/CreateOverlay.jsx"
+import { useEffect, useState } from "react"
+import { taskService } from "../services/taskApi.jsx"
+import { categoriesService } from "../services/categoriesApi.jsx"
 
 export default function Overview() {
 

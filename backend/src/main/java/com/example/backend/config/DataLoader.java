@@ -4,45 +4,44 @@ import com.example.backend.entity.Category;
 import com.example.backend.entity.Subtask;
 import com.example.backend.entity.Task;
 import com.example.backend.repository.CategoryRepository;
+import com.example.backend.repository.SubtaskRepository;
 import com.example.backend.repository.TaskRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
 
 @Component
 public class DataLoader {
 
     private final TaskRepository taskRepository;
     private final CategoryRepository categoryRepository;
+    private final SubtaskRepository subtaskRepository;
 
     @Autowired
-    public DataLoader(TaskRepository taskRepository, CategoryRepository categoryRepository) {
+    public DataLoader(TaskRepository taskRepository, CategoryRepository categoryRepository, SubtaskRepository subtaskRepository) {
         this.taskRepository = taskRepository;
         this.categoryRepository = categoryRepository;
+        this.subtaskRepository = subtaskRepository;
     }
 
     @PostConstruct
     private void loadData() {
-        taskRepository.save(new Task("Nr1", "Project A", LocalDate.of(2025, 9, 30), "", Collections.emptyList()));
-        taskRepository.save(new Task("Nr2", "Urgent", LocalDate.of(2025, 9, 25), "to be finished urgently", Collections.emptyList()));
-        taskRepository.save(new Task("Nr3", "Low priority", LocalDate.of(2025, 12, 5), "consult literature", Collections.emptyList()));
-        taskRepository.save(new Task("Nr4", "Q1", LocalDate.of(2025, 10, 15), "", Collections.emptyList()));
-        taskRepository.save(new Task("Nr5", "Q1", LocalDate.of(2025, 10, 17), "lalalalala", Collections.emptyList()));
+        taskRepository.save(new Task("Nr1", "Project A", LocalDate.of(2025, 9, 30), ""));
+        taskRepository.save(new Task("Nr2", "Urgent", LocalDate.of(2025, 9, 25), "to be finished urgently"));
+        taskRepository.save(new Task("Nr3", "Low priority", LocalDate.of(2025, 12, 5), "consult literature"));
+        taskRepository.save(new Task("Nr4", "Q1", LocalDate.of(2025, 10, 15), ""));
+        taskRepository.save(new Task("Nr5", "Q1", LocalDate.of(2025, 10, 17), "lalalalala"));
 
         categoryRepository.save(new Category("Urgent"));
         categoryRepository.save(new Category("Low priority"));
         categoryRepository.save(new Category("Q1"));
         categoryRepository.save(new Category("Project A"));
 
-        Task task = new Task("Nr6", "Project A", LocalDate.of(2025, 9, 30), "", Collections.emptyList());
-        Subtask fire = new Subtask("Fire", task);
-        Subtask water = new Subtask("Water", task);
-        Subtask sand = new Subtask("Sand", task);
-        task.setSubtasks(List.of(fire, water, sand));
-        taskRepository.save(task);
+        Task task = taskRepository.save(new Task("Nr6", "Project A", LocalDate.of(2025, 9, 30), ""));
+        subtaskRepository.save(new Subtask("Fire", task.getId()));
+        subtaskRepository.save(new Subtask("Water", task.getId()));
+        subtaskRepository.save(new Subtask("Sand", task.getId()));
     }
 }

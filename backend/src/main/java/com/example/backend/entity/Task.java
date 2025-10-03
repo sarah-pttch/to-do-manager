@@ -1,10 +1,8 @@
 package com.example.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,13 +17,10 @@ public class Task {
     private String category;
     private LocalDate deadline;
     private String notes;
-    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Subtask> subtasks;
 
     public Task() {}
 
-    public Task(String title, String category, LocalDate deadline, String notes, List<Subtask> subtasks) {
+    public Task(String title, String category, LocalDate deadline, String notes) {
         this.status = "open";
         this.creationDate = LocalDate.now();
         this.completionDate = null;
@@ -33,16 +28,14 @@ public class Task {
         this.category = category;
         this.deadline = deadline;
         this.notes = notes;
-        this.subtasks = subtasks;
     }
 
-//    public Task(String status, String title, String category, LocalDate deadline, String notes, List<Subtask> subtasks) {
+//    public Task(String status, String title, String category, LocalDate deadline, String notes) {
 //        this.status = status;
 //        this.title = title;
 //        this.category = category;
 //        this.deadline = deadline;
 //        this.notes = notes;
-//        this.subtasks = subtasks;
 //    }
 
     public Integer getId() {
@@ -109,39 +102,16 @@ public class Task {
         this.notes = notes;
     }
 
-    public List<Subtask> getSubtasks() {
-        return subtasks;
-    }
-
-    public void setSubtasks(List<Subtask> subtasks) {
-        this.subtasks = subtasks;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return Objects.equals(id, task.id) && Objects.equals(status, task.status) && Objects.equals(creationDate, task.creationDate) && Objects.equals(completionDate, task.completionDate) && Objects.equals(title, task.title) && Objects.equals(category, task.category) && Objects.equals(deadline, task.deadline) && Objects.equals(notes, task.notes) && Objects.equals(subtasks, task.subtasks);
+        return Objects.equals(id, task.id) && Objects.equals(status, task.status) && Objects.equals(creationDate, task.creationDate) && Objects.equals(completionDate, task.completionDate) && Objects.equals(title, task.title) && Objects.equals(category, task.category) && Objects.equals(deadline, task.deadline) && Objects.equals(notes, task.notes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, status, creationDate, completionDate, title, category, deadline, notes, subtasks);
-    }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", status='" + status + '\'' +
-                ", creationDate=" + creationDate +
-                ", completionDate=" + completionDate +
-                ", title='" + title + '\'' +
-                ", category='" + category + '\'' +
-                ", deadline=" + deadline +
-                ", notes='" + notes + '\'' +
-                ", subtasks=" + subtasks +
-                '}';
+        return Objects.hash(id, status, creationDate, completionDate, title, category, deadline, notes);
     }
 }

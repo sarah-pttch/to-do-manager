@@ -7,6 +7,9 @@ import com.example.backend.repository.SubtaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 @Service
 public class SubtaskService {
 
@@ -21,5 +24,11 @@ public class SubtaskService {
         subtaskDto.setStatus("open");
         Subtask createdSubtask = subtaskRepository.save(SubtaskMapper.toEntity(subtaskDto));
         return SubtaskMapper.toDto(createdSubtask);
+    }
+
+    public Iterable<SubtaskDto> getSubtasksByTaskId(Integer taskId) {
+        Iterable<Subtask> subtasks = subtaskRepository.findAllByTaskId(taskId);
+        return StreamSupport.stream(subtasks.spliterator(), false)
+                .map(SubtaskMapper::toDto).collect(Collectors.toList());
     }
 }

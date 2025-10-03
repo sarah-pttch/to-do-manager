@@ -14,7 +14,6 @@ public class TaskMapper {
         dto.setCategory(task.getCategory());
         dto.setDeadline(task.getDeadline());
         dto.setNotes(task.getNotes());
-        dto.setSubtasks(task.getSubtasks());
         return dto;
     }
 
@@ -27,7 +26,6 @@ public class TaskMapper {
         task.setCategory(dto.getCategory());
         task.setDeadline(dto.getDeadline());
         task.setNotes(dto.getNotes());
-        task.setSubtasks(dto.getSubtasks());
         return task;
     }
 }

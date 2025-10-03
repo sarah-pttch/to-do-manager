@@ -19,4 +19,9 @@ public class SubtaskController {
     public ResponseEntity<SubtaskDto> createSubtask(@RequestBody SubtaskDto subtaskDto) {
         return new ResponseEntity<>(subtaskService.createSubtask(subtaskDto), HttpStatus.CREATED);
     }
+
+    @GetMapping("/{taskId}")
+    public ResponseEntity<Iterable<SubtaskDto>> getSubtasksByTaskId(@PathVariable Integer taskId) {
+        return new ResponseEntity<>(subtaskService.getSubtasksByTaskId(taskId), HttpStatus.OK);
+    }
 }

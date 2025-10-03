@@ -11,6 +11,7 @@ const api = axios.create({
 
 export const subtaskService = {
     create: (data) => api.post('', data),
+    getAllByTaskId: (taskId) => api.get(`/${taskId}`),
 }
 
 export default api;

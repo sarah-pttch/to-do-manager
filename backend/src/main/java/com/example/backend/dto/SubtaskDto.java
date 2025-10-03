@@ -1,14 +1,12 @@
 package com.example.backend.dto;
 
-import com.example.backend.entity.Task;
-
 import java.util.Objects;
 
 public class SubtaskDto {
     private Integer id;
     private String status;
     private String description;
-    private Task task;
+    private Integer taskId;
 
     public Integer getId() {
         return id;
@@ -34,12 +32,12 @@ public class SubtaskDto {
         this.description = description;
     }
 
-    public Task getTask() {
-        return task;
+    public Integer getTaskId() {
+        return taskId;
     }
 
-    public void setTask(Task task) {
-        this.task = task;
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
     }
 
     @Override
@@ -47,21 +45,11 @@ public class SubtaskDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SubtaskDto that = (SubtaskDto) o;
-        return Objects.equals(id, that.id) && Objects.equals(status, that.status) && Objects.equals(description, that.description) && Objects.equals(task, that.task);
+        return Objects.equals(id, that.id) && Objects.equals(status, that.status) && Objects.equals(description, that.description) && Objects.equals(taskId, that.taskId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, status, description, task);
-    }
-
-    @Override
-    public String toString() {
-        return "SubtaskDto{" +
-                "id=" + id +
-                ", status='" + status + '\'' +
-                ", description='" + description + '\'' +
-                ", task=" + task +
-                '}';
+        return Objects.hash(id, status, description, taskId);
     }
 }

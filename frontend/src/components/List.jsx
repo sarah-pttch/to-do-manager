@@ -1,25 +1,41 @@
-import '../styles/List.css'
-import { useState } from "react"
+import "../styles/List.css"
+import { useState} from "react"
 import EditOverlay from "./EditOverlay.jsx"
 import { taskService } from "../services/taskApi.jsx"
 import { IoCheckmarkCircleOutline, IoCloseCircleOutline, IoCreateOutline, IoAddCircleOutline } from "react-icons/io5"
 import { IconContext } from "react-icons"
-import SubtaskOverlay from "./SubtaskOverlay.jsx";
+import SubtaskOverlay from "./SubtaskOverlay.jsx"
+import {subtaskService} from "../services/subtaskApi.jsx"
 
 export default function List({ data, onUpdate, categories }) {
 
-    const [previewVisible, setPreviewVisible] = useState(false);
-    const [previewItem, setPreviewItem] = useState([]);
-    const [previewSubtasks, setPreviewSubtasks] = useState([]);
-    const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false);
-    const [isSubtaskOverlayOpen, setIsSubtaskOverlayOpen] = useState(false);
+    const [previewVisible, setPreviewVisible] = useState(false)
+    const [previewItem, setPreviewItem] = useState([])
+    const [previewSubtasks, setPreviewSubtasks] = useState([])
+    const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false)
+    const [isSubtaskOverlayOpen, setIsSubtaskOverlayOpen] = useState(false)
+    const [subtasksLoading, setSubtasksLoading] = useState(false)
+
+    const retrieveData = async (taskId) => {
+        setSubtasksLoading(true)
+        console.log(taskId)
+        try {
+            const subtasksData = await subtaskService.getAllByTaskId(taskId)
+            setPreviewSubtasks(subtasksData.data)
+        } catch (error) {
+            console.error("No subtasks for this task", error)
+        } finally {
+            setSubtasksLoading(false)
+        }
+    }
 
     const ListItem = ({ dataItem }) => {
 
         const handleClick = (dataItem) => {
             setPreviewVisible(true);
             setPreviewItem(dataItem);
-            setPreviewSubtasks(dataItem.subtasks);
+            retrieveData(dataItem.id)
+            // setPreviewSubtasks(dataItem.subtasks);
         }
 
         const daysUntilDeadline = (deadline) => {
@@ -33,6 +49,24 @@ export default function List({ data, onUpdate, categories }) {
                 <div>{dataItem.title}</div>
                 <div className='itemDeadline'>{dataItem.deadline} ({daysUntilDeadline(dataItem.deadline)} days left)</div>
             </li>
+        )
+    }
+
+    const Subtasks = () => {
+
+        return (
+            <div className='subtasksContainer'>
+                {subtasksLoading ? (
+                    <div>Loading subtasks...</div>
+                ) : (
+                    previewSubtasks.length > 0 && previewSubtasks.map((subtask) => (
+                        <div>
+                            <input key={subtask.id} type='checkbox'/>
+                            {subtask.description}
+                        </div>
+                    ))
+                )}
+            </div>
         )
     }
 
@@ -106,14 +140,7 @@ export default function List({ data, onUpdate, categories }) {
                                     </IconContext>
                                 </button>
                             </div>
-                            <div className='subtasksContainer'>
-                                {previewSubtasks.length > 0 && previewSubtasks.map((subtask) => (
-                                    <div>
-                                        <input key={subtask.id} type='checkbox'/>
-                                        {subtask.description}
-                                    </div>
-                                ))}
-                            </div>
+                            <Subtasks taskId={previewItem.id} />
                         </div>
                     <div className='buttonContainer'>
                         <button className='actionButton' title='Edit task' onClick={edit}>
@@ -134,7 +161,7 @@ export default function List({ data, onUpdate, categories }) {
                     </div>
                     <EditOverlay item={previewItem} closePreview={setPreviewVisible} isOverlayOpen={isEditOverlayOpen}
                                  setIsOverlayOpen={setIsEditOverlayOpen} onUpdate={onUpdate} categories={categories}/>
-                    <SubtaskOverlay task={previewItem} isOverlayOpen={isSubtaskOverlayOpen} setIsOverlayOpen={setIsSubtaskOverlayOpen} setSubtasks={setPreviewSubtasks}/>
+                    <SubtaskOverlay taskId={previewItem.id} isOverlayOpen={isSubtaskOverlayOpen} setIsOverlayOpen={setIsSubtaskOverlayOpen} setSubtasks={setPreviewSubtasks}/>
                 </div>
             </div>
         </div>

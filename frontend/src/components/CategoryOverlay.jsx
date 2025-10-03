@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { categoriesService } from "../services/categoriesApi.jsx";
-import Overlay from "./Overlay.jsx";
+import { useState } from "react"
+import { categoriesService } from "../services/categoriesApi.jsx"
+import Overlay from "./Overlay.jsx"
 
 
 export default function CategoryOverlay({ onAdd }) {

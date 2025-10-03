@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { subtaskService } from "../services/subtaskApi.jsx";
-import Overlay from "./Overlay.jsx";
+import { useState } from "react"
+import { subtaskService } from "../services/subtaskApi.jsx"
+import Overlay from "./Overlay.jsx"
 
 
-export default function SubtaskOverlay({ task, isOverlayOpen, setIsOverlayOpen, setSubtasks }) {
+export default function SubtaskOverlay({ taskId, isOverlayOpen, setIsOverlayOpen, setSubtasks }) {
     const [description, setDescription] = useState('');
 
     const handleSubmit = async () => {
         try {
-            const newSubtask = await subtaskService.create({description, task})
+            const newSubtask = await subtaskService.create({description, taskId})
             setDescription('')
             setIsOverlayOpen(!isOverlayOpen)
             setSubtasks(prevSubtasks => [...prevSubtasks, newSubtask.data])
