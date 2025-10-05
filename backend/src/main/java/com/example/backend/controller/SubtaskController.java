@@ -24,4 +24,10 @@ public class SubtaskController {
     public ResponseEntity<Iterable<SubtaskDto>> getSubtasksByTaskId(@PathVariable Integer taskId) {
         return new ResponseEntity<>(subtaskService.getSubtasksByTaskId(taskId), HttpStatus.OK);
     }
+
+    @PutMapping("/{subtaskId}")
+    public ResponseEntity<Void> checkOffSubtask(@PathVariable Integer subtaskId) {
+        subtaskService.checkOffSubtask(subtaskId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

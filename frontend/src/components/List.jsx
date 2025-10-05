@@ -2,7 +2,13 @@ import "../styles/List.css"
 import { useState} from "react"
 import EditOverlay from "./EditOverlay.jsx"
 import { taskService } from "../services/taskApi.jsx"
-import { IoCheckmarkCircleOutline, IoCloseCircleOutline, IoCreateOutline, IoAddCircleOutline } from "react-icons/io5"
+import {
+    IoCheckmarkCircleOutline,
+    IoCloseCircleOutline,
+    IoCreateOutline,
+    IoAddCircleOutline,
+    IoCheckmarkSharp
+} from "react-icons/io5"
 import { IconContext } from "react-icons"
 import SubtaskOverlay from "./SubtaskOverlay.jsx"
 import {subtaskService} from "../services/subtaskApi.jsx"
@@ -18,7 +24,6 @@ export default function List({ data, onUpdate, categories }) {
 
     const retrieveData = async (taskId) => {
         setSubtasksLoading(true)
-        console.log(taskId)
         try {
             const subtasksData = await subtaskService.getAllByTaskId(taskId)
             setPreviewSubtasks(subtasksData.data)
@@ -32,16 +37,15 @@ export default function List({ data, onUpdate, categories }) {
     const ListItem = ({ dataItem }) => {
 
         const handleClick = (dataItem) => {
-            setPreviewVisible(true);
-            setPreviewItem(dataItem);
+            setPreviewVisible(true)
+            setPreviewItem(dataItem)
             retrieveData(dataItem.id)
-            // setPreviewSubtasks(dataItem.subtasks);
         }
 
         const daysUntilDeadline = (deadline) => {
-            const today = new Date();
-            const taskDate = new Date(deadline);
-            return Math.round((taskDate - today) / 86400000);
+            const today = new Date()
+            const taskDate = new Date(deadline)
+            return Math.round((taskDate - today) / 86400000)
         }
 
         return (
@@ -54,15 +58,24 @@ export default function List({ data, onUpdate, categories }) {
 
     const Subtasks = () => {
 
+        const handleSubtaskCheckoff = async (subtaskId) => {
+            await subtaskService.checkOffSubtask(subtaskId)
+            retrieveData(previewItem.id)
+        }
+
         return (
             <div className='subtasksContainer'>
                 {subtasksLoading ? (
                     <div>Loading subtasks...</div>
                 ) : (
                     previewSubtasks.length > 0 && previewSubtasks.map((subtask) => (
-                        <div>
-                            <input key={subtask.id} type='checkbox'/>
-                            {subtask.description}
+                        <div className='subtaskItem'>
+                            <button className={`${subtask.status === 'open' ? 'subtaskButton' : 'subtaskButtonDone'}`} disabled={subtask.status !== 'open'} title='Mark subtask as done' onClick={() => handleSubtaskCheckoff(subtask.id)}>
+                                <IconContext value={{size: '1em'}}>
+                                    <IoCheckmarkSharp/>
+                                </IconContext>
+                            </button>
+                            <div className={`${subtask.status === 'open' ? '' : 'crossedOut'}`}>{subtask.description}</div>
                         </div>
                     ))
                 )}
@@ -93,7 +106,7 @@ export default function List({ data, onUpdate, categories }) {
                 notes: previewItem.notes
             });
         } catch(error) {
-            alert("Error updating task: " + error)
+            console.error("Error updating task: ", error)
         }
         setPreviewVisible(false);
         onUpdate();

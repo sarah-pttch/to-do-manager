@@ -68,10 +68,13 @@
 
 .subtasksContainer {
     padding-left: 20px;
+}
 
-    input {
-        margin-right: 2px;
-    }
+.subtaskItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
 }
 
 .actionButton {
@@ -83,6 +86,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.subtaskButton {
+    background-color: rgba(121, 167, 5, 1);
+    border-radius: 5px;
+    height: 18px;
+    width: 18px;
+    padding: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subtaskButtonDone {
+    background-color: rgba(121, 167, 5, 0.3);
+    border-radius: 5px;
+    height: 18px;
+    width: 18px;
+    padding: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.crossedOut {
+    text-decoration: line-through;
 }
 
 .plusButton {

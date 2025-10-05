@@ -31,4 +31,8 @@ public class SubtaskService {
         return StreamSupport.stream(subtasks.spliterator(), false)
                 .map(SubtaskMapper::toDto).collect(Collectors.toList());
     }
+
+    public void checkOffSubtask(Integer subtaskId) {
+        subtaskRepository.updateStatusById(subtaskId);
+    }
 }
