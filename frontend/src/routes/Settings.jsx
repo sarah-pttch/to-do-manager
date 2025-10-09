@@ -1,26 +1,17 @@
 import '../styles/Settings.css'
-import { useEffect, useState } from "react";
-import { categoriesService } from "../services/categoriesApi.jsx";
-import CategoryOverlay from "../components/CategoryOverlay.jsx";
+import CategoryOverlay from "../components/CategoryOverlay.jsx"
+import { useCategoryStore } from "../stores/categoryStore.jsx"
 
 export default function Settings() {
 
-    const [categories, setCategories] = useState([]);
-    const retrieveData = async () => {
-        const data = await categoriesService.getAll();
-        setCategories(data.data);
-    }
-
-    useEffect(() => {
-        retrieveData();
-    }, []);
+    const categories = useCategoryStore((state) => state.categories)
+    const deleteCategory = useCategoryStore((state) => state.deleteCategory)
 
     const CategoryItem = ({ category }) => {
 
         const removeCategory = async () => {
             try {
-                await categoriesService.delete(category.id);
-                retrieveData();
+                await deleteCategory(category.id)
             } catch (error) {
                 alert("Error deleting category: " + error)
             }
@@ -41,7 +32,7 @@ export default function Settings() {
                 {categories.map((category, index) => (
                     <CategoryItem key={index} category={category} />
                     ))}
-                <CategoryOverlay onAdd={retrieveData} />
+                <CategoryOverlay />
             </div>
         </div>
     )

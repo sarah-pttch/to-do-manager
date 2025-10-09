@@ -9,7 +9,7 @@ const api = axios.create({
     withCredentials: false
 })
 
-export const categoriesService = {
+export const categoryService = {
     create: (data) => api.post('', data),
     getAll: () => api.get(''),
     // getById: (id) => api.get(`/${id}`),

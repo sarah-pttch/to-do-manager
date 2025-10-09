@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 import Overlay from './Overlay.jsx'
-import { taskService } from '../services/taskApi.jsx'
+import { useTaskStore } from "../stores/taskStore.jsx"
+import { useCategoryStore } from "../stores/categoryStore.jsx"
 
-export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOverlayOpen, onUpdate, categories }) {
+export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOverlayOpen }) {
     const [title, setTitle] = useState('')
     const [category, setCategory] = useState('')
     const [deadline, setDeadline] = useState('')
     const [notes, setNotes] = useState('')
+    const updateTask = useTaskStore((state) => state.updateTask)
+    const categories = useCategoryStore((state) => state.categories)
 
     useEffect(() => {
         setTitle(item.title);
@@ -17,7 +20,7 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
 
     const handleSubmit = async () => {
         try {
-            await taskService.update(item.id, {
+            await updateTask(item.id, {
                 status: "open",
                 creationDate: item.creationDate,
                 title,
@@ -31,7 +34,7 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
             setNotes('')
             setIsOverlayOpen(!isOverlayOpen)
             closePreview(false);
-            onUpdate();
+            // onUpdate();
             alert("Task updated successfully")
         } catch(error) {
             alert("Error updating task: " + error)

@@ -1,23 +1,26 @@
+import { useTaskStore } from '../stores/taskStore.jsx'
 import { useState } from 'react'
 import Overlay from './Overlay.jsx'
 import { taskService } from '../services/taskApi.jsx'
+import { useCategoryStore } from "../stores/categoryStore.jsx"
 
-export default function CreateOverlay({ onAdd, categories }) {
-    const [isOverlayOpen, setIsOverlayOpen] = useState(false)
+export default function CreateOverlay({ isOverlayOpen, setIsOverlayOpen }) {
     const [title, setTitle] = useState('')
     const [category, setCategory] = useState('')
     const [deadline, setDeadline] = useState('')
     const [notes, setNotes] = useState('')
+    const addTask = useTaskStore((state) => state.addTask)
+    const categories = useCategoryStore((state) => state.categories)
 
     const handleSubmit = async () => {
         try {
-            await taskService.create({title, category, deadline, notes})
+            const task = await taskService.create({title, category, deadline, notes})
+            addTask(task.data)
             setTitle('')
             setCategory('')
             setDeadline('')
             setNotes('')
             setIsOverlayOpen(!isOverlayOpen)
-            onAdd();
             alert("Task created successfully")
         } catch(error) {
             alert("Error creating task: " + error)
@@ -26,7 +29,6 @@ export default function CreateOverlay({ onAdd, categories }) {
 
     return (
         <>
-            <button onClick={() => setIsOverlayOpen(!isOverlayOpen)}>Open Overlay</button>
             <Overlay
                 isOpen={isOverlayOpen}
                 overlayTitle={'Create a new task'}
@@ -42,7 +44,7 @@ export default function CreateOverlay({ onAdd, categories }) {
                 <select id='category' value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option></option>
                     {categories.map((item) => (
-                        <option value={item.name}>{item.name}</option>
+                        <option key={item.id} value={item.name}>{item.name}</option>
                     ))}
                 </select>
                 <label>Deadline: </label>

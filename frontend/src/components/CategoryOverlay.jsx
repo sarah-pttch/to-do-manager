@@ -1,18 +1,21 @@
 import { useState } from "react"
-import { categoriesService } from "../services/categoriesApi.jsx"
+import { categoryService } from "../services/categoryApi.jsx"
 import Overlay from "./Overlay.jsx"
+import { useCategoryStore } from "../stores/categoryStore.jsx"
 
 
-export default function CategoryOverlay({ onAdd }) {
+export default function CategoryOverlay() {
+    const addCategory = useCategoryStore((state) => state.addCategory)
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
     const [name, setName] = useState('');
 
     const handleSubmit = async () => {
         try {
-            await categoriesService.create({name})
+            const category = await categoryService.create({name})
+            addCategory(category.data)
             setName('')
             setIsOverlayOpen(!isOverlayOpen)
-            onAdd();
+            // onAdd();
             alert("Category created successfully")
         } catch (error) {
             alert("Error creating category: " + error)
