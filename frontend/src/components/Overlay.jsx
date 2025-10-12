@@ -1,9 +1,10 @@
 import '../styles/Overlay.css'
+import ReactDOM from 'react-dom'
 
 export default function Overlay({ isOpen, overlayTitle, buttonTitle, onClose, onSave, children }) {
 
 
-    return (
+    return ReactDOM.createPortal(
         <>
             {isOpen && (
                 <div className='overlayContainer'>
@@ -20,6 +21,7 @@ export default function Overlay({ isOpen, overlayTitle, buttonTitle, onClose, on
                     </div>
                 </div>
             )}
-        </>
+        </>,
+        document.body
     )
 }
