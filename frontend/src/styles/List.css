@@ -1,9 +1,13 @@
 .listContainer {
     width: 90vw;
+    position: relative;
     height: fit-content;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
     border-radius: 5px;
     background-color: rgba(121, 167, 5, .5);
+    z-index: 1;
 }
 
 .listTitle {
@@ -132,6 +136,21 @@
     position: absolute;
     right: 10px;
     top: 10px;
+}
+
+.selectContainer {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    right: 10px;
+    top: 4px;
+}
+
+.topSelect {
+    background-color: lightgrey;
+    height: 20px;
+    border-radius: 5px;
+    border: darkgreen 2px solid;
 }
 
 .listItem {

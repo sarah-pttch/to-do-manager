@@ -1,5 +1,5 @@
 import "../styles/List.css"
-import { useState} from "react"
+import {useEffect, useState} from "react"
 import EditOverlay from "./EditOverlay.jsx"
 import {
     IoCheckmarkCircleOutline,
@@ -12,9 +12,16 @@ import { IconContext } from "react-icons"
 import SubtaskOverlay from "./SubtaskOverlay.jsx"
 import { subtaskService } from "../services/subtaskApi.jsx"
 import { useTaskStore } from "../stores/taskStore.jsx"
+import { useCategoryStore } from "../stores/categoryStore.jsx"
 
 export default function List({ data }) {
 
+    const [listedData, setListedData] = useState([])
+    const [filterActive, setFilterActive] = useState(false)
+    const [categoryFilter, setCategoryFilter] = useState('')
+    // const [sortActive, setSortActive] = useState(false)
+    const [sorting, setSorting] = useState('')
+    const [isProcessing, setIsProcessing] = useState(false)
     const [previewVisible, setPreviewVisible] = useState(false)
     const [previewItem, setPreviewItem] = useState([])
     const [previewSubtasks, setPreviewSubtasks] = useState([])
@@ -22,6 +29,7 @@ export default function List({ data }) {
     const [isSubtaskOverlayOpen, setIsSubtaskOverlayOpen] = useState(false)
     const [subtasksLoading, setSubtasksLoading] = useState(false)
     const checkOffTask = useTaskStore((state) => state.checkOffTask)
+    const categories = useCategoryStore((state) => state.categories)
 
     const retrieveData = async (taskId) => {
         setSubtasksLoading(true)
@@ -112,6 +120,60 @@ export default function List({ data }) {
         setPreviewVisible(false);
     }
 
+    const filter = (e) => {
+        setIsProcessing(true)
+        setSorting('')
+        if (e.target.value === 'Select category filter...') {
+            setCategoryFilter('')
+            setListedData(data)
+            setFilterActive(false)
+        } else {
+            setCategoryFilter(e.target.value)
+            setListedData(data.filter((item) => item.category === e.target.value))
+            setFilterActive(true)
+        }
+        // if (sortActive) {
+        //     sortData()
+        // }
+        setIsProcessing(false)
+    }
+
+    const sort = (e) => {
+        setIsProcessing(true)
+        if (e.target.value === 'Sort by...') {
+            setSorting('')
+            // setSortActive(false)
+        } else {
+            setSorting(e.target.value)
+            // setSortActive(true)
+            if (e.target.value === 'Deadline') {
+                setListedData(listedData.sort((a, b) => new Date(a.deadline) - new Date(b.deadline)))
+            } else {
+                setListedData(listedData.sort((a, b) => new Date(a.creationDate) - new Date(b.creationDate)))
+            }
+        }
+        setIsProcessing(false)
+    }
+
+    // const sortData = () => {
+    //     if (sorting === 'Deadline') {
+    //         setListedData(listedData.sort((a, b) => new Date(a.deadline) - new Date(b.deadline)))
+    //     } else {
+    //         setListedData(listedData.sort((a, b) => new Date(a.creationDate) - new Date(b.creationDate)))
+    //     }
+    // }
+
+    useEffect(() => {
+        setListedData(data)
+        setSorting('')
+        if (filterActive) {
+            setListedData(data.filter((item) => item.category === categoryFilter))
+        }
+        // if (sortActive) {
+        //     sortData()
+        // }
+    }, [data]);
+
     if (data.length === 0) return (
         <div className='listContainer'>
             <p className='listTitle'>List of tasks</p>
@@ -121,12 +183,33 @@ export default function List({ data }) {
 
     return (
         <div className='listContainer'>
+            <div className='selectContainer'>
+                <select className='topSelect' id='sorting' value={sorting} onChange={sort}>
+                    <option>Sort by...</option>
+                    <option>Creation date</option>
+                    <option>Deadline</option>
+                </select>
+                <select className='topSelect' id='categoryFilter' value={categoryFilter} onChange={filter}>
+                    <option>Select category filter...</option>
+                    {categories.map((item) => (
+                        <option key={item.id} value={item.name}>{item.name}</option>
+                    ))}
+                </select>
+            </div>
             <p className='listTitle'>List of tasks</p>
             <div className='listContent'>
                 <div className='listItemsContainer'>
-                    {data.map((item, index) => (
-                        <ListItem key={index} dataItem={item}/>
-                    ))}
+                    {isProcessing ? (
+                        <div>Processing...</div>
+                    ) : (
+                        listedData.length > 0 ? (
+                            listedData.map((item, index) => (
+                                <ListItem key={index} dataItem={item}/>
+                            ))
+                        ) : (
+                            <div>No matches found</div>
+                        )
+                    )}
                 </div>
                 <div className={`previewContainer ${previewVisible ? 'visible' : 'hidden'}`}>
                     <p className='previewTitle'>{previewItem.title}</p>

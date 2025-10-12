@@ -23,7 +23,7 @@ export default function Archive() {
                             <li key={index} className='archiveListItem'>
                                 <div>{item.title}</div>
                                 <div>{item.category}</div>
-                                <div>Completion Date</div>
+                                <div>{item.completionDate}</div>
                             </li>
                         ))}
                 </div>

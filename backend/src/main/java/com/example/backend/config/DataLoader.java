@@ -28,8 +28,8 @@ public class DataLoader {
 
     @PostConstruct
     private void loadData() {
-        taskRepository.save(new Task("Nr1", "Project A", LocalDate.of(2025, 9, 30), ""));
-        taskRepository.save(new Task("Nr2", "Urgent", LocalDate.of(2025, 9, 25), "to be finished urgently"));
+        taskRepository.save(new Task("Nr1", "Project A", LocalDate.of(2025, 10, 30), ""));
+        taskRepository.save(new Task("Nr2", "Urgent", LocalDate.of(2025, 10, 25), "to be finished urgently"));
         taskRepository.save(new Task("Nr3", "Low priority", LocalDate.of(2025, 12, 5), "consult literature"));
         taskRepository.save(new Task("Nr4", "Q1", LocalDate.of(2025, 10, 15), ""));
         taskRepository.save(new Task("Nr5", "Q1", LocalDate.of(2025, 10, 17), "lalalalala"));
@@ -39,7 +39,7 @@ public class DataLoader {
         categoryRepository.save(new Category("Q1"));
         categoryRepository.save(new Category("Project A"));
 
-        Task task = taskRepository.save(new Task("Nr6", "Project A", LocalDate.of(2025, 9, 30), ""));
+        Task task = taskRepository.save(new Task("Nr6", "Project A", LocalDate.of(2025, 11, 30), ""));
         subtaskRepository.save(new Subtask("Fire", task.getId()));
         subtaskRepository.save(new Subtask("Water", task.getId()));
         subtaskRepository.save(new Subtask("Sand", task.getId()));
