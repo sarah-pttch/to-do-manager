@@ -11,11 +11,11 @@ const api = axios.create({
 
 export const taskService = {
     create: (data) => api.post('', data),
+    createLongterm: (data) => api.post('/longterm', data),
     getAll: () => api.get(''),
     getArchive: () => api.get('/completed'),
-    getById: (id) => api.get(`/${id}`),
+    getLongterm: () => api.get('/longterm'),
     update: (id, data) => api.put(`/${id}`, data),
-    delete: (id) => api.delete(`/${id}`)
 }
 
 export default api;

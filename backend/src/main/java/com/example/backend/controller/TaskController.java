@@ -20,6 +20,11 @@ public class TaskController {
         return new ResponseEntity<>(taskService.createTask(taskDto), HttpStatus.CREATED);
     }
 
+    @PostMapping("/longterm")
+    public ResponseEntity<TaskDto> createLongtermTask(@RequestBody TaskDto taskDto) {
+        return new ResponseEntity<>(taskService.createLongtermTask(taskDto), HttpStatus.CREATED);
+    }
+
     @GetMapping
     public ResponseEntity<Iterable<TaskDto>> getAllOpenTasks() {
         return new ResponseEntity<>(taskService.getAllOpenTasks(), HttpStatus.OK);
@@ -30,10 +35,10 @@ public class TaskController {
         return new ResponseEntity<>(taskService.getAllCompletedTasks(), HttpStatus.OK);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<TaskDto> getTaskById(@PathVariable Integer id) {
-//        return new ResponseEntity<>(taskService.getTaskById(id), HttpStatus.FOUND);
-//    }
+    @GetMapping("/longterm")
+    public ResponseEntity<Iterable<TaskDto>> getAllLongtermTasks() {
+        return new ResponseEntity<>(taskService.getAllLongtermTasks(), HttpStatus.OK);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<TaskDto> updateTask(@PathVariable Integer id, @RequestBody TaskDto taskDto) {

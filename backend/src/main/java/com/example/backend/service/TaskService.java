@@ -29,9 +29,18 @@ public class TaskService {
         return TaskMapper.toDto(createdTask);
     }
 
+    public TaskDto createLongtermTask(TaskDto taskDto) {
+        taskDto.setStatus("open");
+        taskDto.setCreationDate(LocalDate.now());
+        taskDto.setDeadline(null);
+        Task createdTask = taskRepository.save(TaskMapper.toEntity(taskDto));
+        return TaskMapper.toDto(createdTask);
+    }
+
     public Iterable<TaskDto> getAllOpenTasks() {
         Iterable<Task> allTasks = taskRepository.findAllByStatus("open");
         return StreamSupport.stream(allTasks.spliterator(), false)
+                .filter((task) -> task.getDeadline() != null)
                 .map(TaskMapper::toDto).collect(Collectors.toList());
     }
 
@@ -41,10 +50,11 @@ public class TaskService {
                 .map(TaskMapper::toDto).collect(Collectors.toList());
     }
 
-//    public TaskDto getTaskById(Integer id) {
-//        Task task = taskRepository.findById(id).orElseThrow(() -> new ElementNotFoundException(id));
-//        return TaskMapper.toDto(task);
-//    }
+    public Iterable<TaskDto> getAllLongtermTasks() {
+        Iterable<Task> allLongtermTasks = taskRepository.findAllByStatusAndDeadline("open", null);
+        return StreamSupport.stream(allLongtermTasks.spliterator(), false)
+                .map(TaskMapper::toDto).collect(Collectors.toList());
+    }
 
     public TaskDto updateTask(Integer id, TaskDto taskDto) {
         if(taskDto.getStatus().equals("done")) {

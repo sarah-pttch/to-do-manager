@@ -30,14 +30,6 @@ public class Task {
         this.notes = notes;
     }
 
-//    public Task(String status, String title, String category, LocalDate deadline, String notes) {
-//        this.status = status;
-//        this.title = title;
-//        this.category = category;
-//        this.deadline = deadline;
-//        this.notes = notes;
-//    }
-
     public Integer getId() {
         return id;
     }
