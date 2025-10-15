@@ -38,6 +38,11 @@ public class DataLoader {
         categoryRepository.save(new Category("Low priority"));
         categoryRepository.save(new Category("Q1"));
         categoryRepository.save(new Category("Project A"));
+        categoryRepository.save(new Category("Idea"));
+
+        taskRepository.save(new Task("Idea1", "Idea", null, "this is not urgent"));
+        taskRepository.save(new Task("Idea2", "Idea", null, "interesting to research, check for literature, case studies, etc., align with teamlead regarding budget"));
+        taskRepository.save(new Task("Idea3", "Idea", null, "look into this"));
 
         Task task = taskRepository.save(new Task("Nr6", "Project A", LocalDate.of(2025, 11, 30), ""));
         subtaskRepository.save(new Subtask("Fire", task.getId()));

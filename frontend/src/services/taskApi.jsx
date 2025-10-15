@@ -16,6 +16,7 @@ export const taskService = {
     getArchive: () => api.get('/completed'),
     getLongterm: () => api.get('/longterm'),
     update: (id, data) => api.put(`/${id}`, data),
+    delete: (id) => api.delete(`/${id}`),
 }
 
 export default api;

@@ -3,11 +3,12 @@ import Overlay from './Overlay.jsx'
 import { useTaskStore } from "../stores/taskStore.jsx"
 import { useCategoryStore } from "../stores/categoryStore.jsx"
 
-export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOverlayOpen }) {
+export default function EditOverlay({ item, action, isOverlayOpen, setIsOverlayOpen }) {
     const [title, setTitle] = useState('')
     const [category, setCategory] = useState('')
     const [deadline, setDeadline] = useState('')
     const [notes, setNotes] = useState('')
+    const [deadlineDisabled, setDeadlineDisabled] = useState(false)
     const updateTask = useTaskStore((state) => state.updateTask)
     const categories = useCategoryStore((state) => state.categories)
 
@@ -16,7 +17,15 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
         setCategory(item.category);
         setDeadline(item.deadline);
         setNotes(item.notes);
+        if (item.deadline === null) {
+            setDeadlineDisabled(true);
+        }
     }, [item]);
+
+    const handleDisableDeadline = () => {
+        setDeadlineDisabled(!deadlineDisabled)
+        setDeadline('')
+    }
 
     const handleSubmit = async () => {
         try {
@@ -32,9 +41,9 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
             setCategory('')
             setDeadline('')
             setNotes('')
+            setDeadlineDisabled(false)
             setIsOverlayOpen(!isOverlayOpen)
-            closePreview(false);
-            // onUpdate();
+            action()
             alert("Task updated successfully")
         } catch(error) {
             alert("Error updating task: " + error)
@@ -62,7 +71,15 @@ export default function EditOverlay({ item, closePreview, isOverlayOpen, setIsOv
                     ))}
                 </select>
                 <label>Deadline: </label>
-                <input id='deadline' type='date' value={deadline} onChange={(e) => setDeadline(e.target.value)}/>
+                <div className='deadlineContainer'>
+                    <input id='deadline' type='date' disabled={deadlineDisabled} value={deadline}
+                           onChange={(e) => setDeadline(e.target.value)}/>
+                    <label>
+                        <input type='checkbox' className='deadlineCheckbox' checked={deadlineDisabled}
+                               onChange={handleDisableDeadline}/>
+                        No deadline
+                    </label>
+                </div>
                 <label>Notes:</label>
                 <textarea id='notes' rows="5" cols="50" value={notes} onChange={(e) => setNotes(e.target.value)}/>
             </Overlay>

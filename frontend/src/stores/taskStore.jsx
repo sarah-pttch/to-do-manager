@@ -12,9 +12,15 @@ export const useTaskStore = create((set) => ({
     },
     updateTask: async (taskId, taskData) => {
         const updatedTask = await taskService.update(taskId, taskData)
-        set((state) => ({
-            tasks: state.tasks.map((task) => task.id === taskId ? updatedTask.data : task)
-        }))
+        if (taskData.deadline === '') {
+            set((state) => ({
+                tasks: state.tasks.filter((task) => task.id !== taskId)
+            }))
+        } else {
+            set((state) => ({
+                tasks: state.tasks.map((task) => task.id === taskId ? updatedTask.data : task)
+            }))
+        }
     },
     checkOffTask: async (taskId, taskData) => {
         await taskService.update(taskId, taskData)

@@ -146,6 +146,21 @@
     top: 4px;
 }
 
+.hoverButtonContainer {
+    gap: 10px;
+    position: absolute;
+    right: 10px;
+    top: 7px;
+
+    &.hidden {
+        display: none;
+    }
+
+    &.visible {
+        display: flex;
+    }
+}
+
 .topSelect {
     background-color: lightgrey;
     height: 20px;
@@ -169,6 +184,28 @@
     border-radius: 5px;
     padding: 10px;
     justify-content: space-between;
+}
+
+.longtermListItem {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    border: darkgreen 2px solid;
+    border-radius: 5px;
+    padding: 10px;
+    height: fit-content;
+    cursor: pointer;
+
+    .listItemComponent {
+        flex: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &.expanded {
+            white-space: wrap;
+        }
+    }
 }
 
 .itemDeadline {

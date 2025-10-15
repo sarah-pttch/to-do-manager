@@ -255,7 +255,7 @@ export default function List({ data }) {
                             </IconContext>
                         </button>
                     </div>
-                    <EditOverlay item={previewItem} closePreview={setPreviewVisible} isOverlayOpen={isEditOverlayOpen}
+                    <EditOverlay item={previewItem} action={() => setPreviewVisible(false)} isOverlayOpen={isEditOverlayOpen}
                                  setIsOverlayOpen={setIsEditOverlayOpen} />
                     <SubtaskOverlay taskId={previewItem.id} isOverlayOpen={isSubtaskOverlayOpen} setIsOverlayOpen={setIsSubtaskOverlayOpen} setSubtasks={setPreviewSubtasks}/>
                 </div>
