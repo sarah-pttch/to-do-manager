@@ -47,14 +47,44 @@ export default function Navigation() {
     }, []);
 
     return (
-        <div className='navigation' style={{display: 'flex', flexDirection: 'row'}}>
-            <button className={`navButton ${activePage === 0 ? 'active' : ''}`} onClick={toOverview}>Task Overview</button>
+        <div className='navigation'>
+            <button
+                className={`navButton ${activePage === 0 ? 'active' : ''}`}
+                onClick={toOverview}
+            >
+                Task Overview
+            </button>
             {/*<button className={`navButton ${activePage === 1 ? 'active' : ''}`} onClick={toCalendar}>Calendar</button>*/}
-            <button className={`navButton ${activePage === 1 ? 'active' : ''}`} onClick={toLongterm}>Longterm Tasks</button>
-            <button className={`navButton ${activePage === 2 ? 'active' : ''}`} onClick={toArchive}>Archive</button>
-            <button className={`navButton ${activePage === 3 ? 'active' : ''}`} onClick={toStatistics}>Statistics</button>
-            <button className={`navButton ${activePage === 4 ? 'active' : ''}`} onClick={toSettings}>Settings</button>
-            <button className='navButton create' onClick={() => setIsOverlayOpen(!isOverlayOpen)}>Create task</button>
+            <button
+                className={`navButton ${activePage === 1 ? 'active' : ''}`}
+                onClick={toLongterm}
+            >
+                Longterm Tasks
+            </button>
+            <button
+                className={`navButton ${activePage === 2 ? 'active' : ''}`}
+                onClick={toArchive}
+            >
+                Archive
+            </button>
+            <button
+                className={`navButton ${activePage === 3 ? 'active' : ''}`}
+                onClick={toStatistics}
+            >
+                Statistics
+            </button>
+            <button
+                className={`navButton ${activePage === 4 ? 'active' : ''}`}
+                onClick={toSettings}
+            >
+                Settings
+            </button>
+            <button
+                className='navButton create'
+                onClick={() => setIsOverlayOpen(!isOverlayOpen)}
+            >
+                Create task
+            </button>
             <CreateOverlay isOverlayOpen={isOverlayOpen} setIsOverlayOpen={setIsOverlayOpen}/>
         </div>
     )

@@ -35,7 +35,11 @@ export default function Archive() {
                         <div className='legendComponent'>Notes</div>
                     </div>
                     {tasks.map((item, index) => (
-                            <li key={index} className='archiveListItem' onClick={() => handleClick(index)}>
+                            <li
+                                key={index}
+                                className='archiveListItem'
+                                onClick={() => handleClick(index)}
+                            >
                                 <div className={`listItemComponent ${expanded === index ? 'expanded' : ''}`}>{item.title}</div>
                                 <div className={`listItemComponent ${expanded === index ? 'expanded' : ''}`}>{item.category}</div>
                                 <div className={`listItemComponent ${expanded === index ? 'expanded' : ''}`}>{item.completionDate}</div>

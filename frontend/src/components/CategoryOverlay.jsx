@@ -24,7 +24,12 @@ export default function CategoryOverlay() {
 
     return (
         <>
-            <button className='overlayButton' onClick={() => setIsOverlayOpen(!isOverlayOpen)}>Add category</button>
+            <button
+                className='overlayButton'
+                onClick={() => setIsOverlayOpen(!isOverlayOpen)}
+            >
+                Add category
+            </button>
             <Overlay
                 isOpen={isOverlayOpen}
                 overlayTitle={'Create a new category'}
@@ -35,7 +40,12 @@ export default function CategoryOverlay() {
                 onSave={handleSubmit}
             >
                 <label>Name: </label>
-                <input id='name' type='text' value={name} onChange={(e) => setName(e.target.value)} />
+                <input
+                    id='name'
+                    type='text'
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
             </Overlay>
         </>
     )

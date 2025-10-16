@@ -63,9 +63,18 @@ export default function EditOverlay({ item, action, isOverlayOpen, setIsOverlayO
                 onSave={handleSubmit}
             >
                 <label>Title: </label>
-                <input id='title' type='text' value={title} onChange={(e) => setTitle(e.target.value)}/>
+                <input
+                    id='title'
+                    type='text'
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
                 <label>Category: </label>
-                <select id='category' value={category} onChange={(e) => setCategory(e.target.value)}>
+                <select
+                    id='category'
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                >
                     <option></option>
                     {categories.map((item, index) => (
                         <option key={index} value={item.name}>{item.name}</option>
@@ -73,16 +82,31 @@ export default function EditOverlay({ item, action, isOverlayOpen, setIsOverlayO
                 </select>
                 <label>Deadline: </label>
                 <div className='deadlineContainer'>
-                    <input id='deadline' type='date' disabled={deadlineDisabled} value={deadline}
-                           onChange={(e) => setDeadline(e.target.value)}/>
+                    <input
+                        id='deadline'
+                        type='date'
+                        disabled={deadlineDisabled}
+                        value={deadline}
+                        onChange={(e) => setDeadline(e.target.value)}
+                    />
                     <label>
-                        <input type='checkbox' className='deadlineCheckbox' checked={deadlineDisabled}
-                               onChange={handleDisableDeadline}/>
+                        <input
+                            type='checkbox'
+                            className='deadlineCheckbox'
+                            checked={deadlineDisabled}
+                            onChange={handleDisableDeadline}
+                        />
                         No deadline
                     </label>
                 </div>
                 <label>Notes:</label>
-                <textarea id='notes' rows="5" cols="50" value={notes} onChange={(e) => setNotes(e.target.value)}/>
+                <textarea
+                    id='notes'
+                    rows="5"
+                    cols="50"
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                />
             </Overlay>
         </>
     )

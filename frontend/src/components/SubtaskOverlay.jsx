@@ -30,7 +30,12 @@ export default function SubtaskOverlay({ taskId, isOverlayOpen, setIsOverlayOpen
                 onSave={handleSubmit}
             >
                 <label>Description: </label>
-                <input id='description' type='text' value={description} onChange={(e) => setDescription(e.target.value)} />
+                <input
+                    id='description'
+                    type='text'
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
             </Overlay>
         </>
     )

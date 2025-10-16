@@ -1,9 +1,9 @@
 import '../styles/List.css'
 import { useEffect, useState } from "react"
-import { taskService } from "../services/taskApi.jsx"
-import {IconContext} from "react-icons";
-import {IoCheckmarkCircleOutline, IoCreateOutline, IoTrashOutline} from "react-icons/io5";
-import EditOverlay from "../components/EditOverlay.jsx";
+import { taskService } from "../services/taskApi"
+import { IconContext } from "react-icons"
+import { IoCheckmarkCircleOutline, IoCreateOutline, IoTrashOutline } from "react-icons/io5"
+import EditOverlay from "../components/EditOverlay"
 
 export default function Longterm() {
 
@@ -71,23 +71,40 @@ export default function Longterm() {
                         <div className='legendComponent'>Notes</div>
                     </div>
                     {tasks.map((item, index) => (
-                        <li key={index} className='longtermListItem' onClick={() => handleClick(index)} onMouseEnter={() => setHover(index)} onMouseLeave={() => setHover(-1)}>
+                        <li
+                            key={index} className='longtermListItem'
+                            onClick={() => handleClick(index)}
+                            onMouseEnter={() => setHover(index)}
+                            onMouseLeave={() => setHover(-1)}
+                        >
                             <div className={`listItemComponent ${expanded === index ? 'expanded' : ''}`}>{item.title}</div>
                             <div className={`listItemComponent ${expanded === index ? 'expanded' : ''}`}>{item.category}</div>
                             <div className={`listItemComponent ${expanded === index ? 'expanded' : ''}`}>{item.creationDate}</div>
                             <div className={`listItemComponent ${expanded === index ? 'expanded' : ''}`}>{item.notes}</div>
                             <div className={`hoverButtonContainer ${hover === index ? 'visible' : 'hidden'}`}>
-                                <button className='actionButton' title='Edit task' onClick={() => edit(index)}>
+                                <button
+                                    className='actionButton'
+                                    title='Edit task'
+                                    onClick={() => edit(index)}
+                                >
                                     <IconContext value={{size: '1.5em'}}>
                                         <IoCreateOutline/>
                                     </IconContext>
                                 </button>
-                                <button className='actionButton' title='Mark task as done' onClick={() => handleCheckOff(index)}>
+                                <button
+                                    className='actionButton'
+                                    title='Mark task as done'
+                                    onClick={() => handleCheckOff(index)}
+                                >
                                     <IconContext value={{size: '1.5em'}}>
                                         <IoCheckmarkCircleOutline/>
                                     </IconContext>
                                 </button>
-                                <button className='actionButton' title='Delete task' onClick={() => handleDelete(index)}>
+                                <button
+                                    className='actionButton'
+                                    title='Delete task'
+                                    onClick={() => handleDelete(index)}
+                                >
                                     <IconContext value={{size: '1.5em'}}>
                                         <IoTrashOutline/>
                                     </IconContext>
@@ -97,7 +114,12 @@ export default function Longterm() {
                     ))}
                 </div>
             </div>
-            <EditOverlay item={editTask} action={retrieveData} isOverlayOpen={isEditOverlayOpen} setIsOverlayOpen={setIsEditOverlayOpen} />
+            <EditOverlay
+                item={editTask}
+                action={retrieveData}
+                isOverlayOpen={isEditOverlayOpen}
+                setIsOverlayOpen={setIsEditOverlayOpen}
+            />
         </div>
     )
 }

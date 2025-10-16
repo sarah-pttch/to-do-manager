@@ -60,7 +60,9 @@ export default function List({ data }) {
         return (
             <li className='listItem' onClick={() => handleClick(dataItem)}>
                 <div>{dataItem.title}</div>
-                <div className='itemDeadline'>{dataItem.deadline} ({daysUntilDeadline(dataItem.deadline)} days left)</div>
+                <div className='itemDeadline'>
+                    {dataItem.deadline} ({daysUntilDeadline(dataItem.deadline)} days left)
+                </div>
             </li>
         )
     }
@@ -79,12 +81,19 @@ export default function List({ data }) {
                 ) : (
                     previewSubtasks.length > 0 && previewSubtasks.map((subtask) => (
                         <div className='subtaskItem'>
-                            <button className={`${subtask.status === 'open' ? 'subtaskButton' : 'subtaskButtonDone'}`} disabled={subtask.status !== 'open'} title='Mark subtask as done' onClick={() => handleSubtaskCheckoff(subtask.id)}>
+                            <button
+                                className={`${subtask.status === 'open' ? 'subtaskButton' : 'subtaskButtonDone'}`}
+                                disabled={subtask.status !== 'open'}
+                                title='Mark subtask as done'
+                                onClick={() => handleSubtaskCheckoff(subtask.id)}
+                            >
                                 <IconContext value={{size: '1em'}}>
                                     <IoCheckmarkSharp/>
                                 </IconContext>
                             </button>
-                            <div className={`${subtask.status === 'open' ? '' : 'crossedOut'}`}>{subtask.description}</div>
+                            <div className={`${subtask.status === 'open' ? '' : 'crossedOut'}`}>
+                                {subtask.description}
+                            </div>
                         </div>
                     ))
                 )}
@@ -184,12 +193,22 @@ export default function List({ data }) {
     return (
         <div className='listContainer'>
             <div className='selectContainer'>
-                <select className='topSelect' id='sorting' value={sorting} onChange={sort}>
+                <select
+                    className='topSelect'
+                    id='sorting'
+                    value={sorting}
+                    onChange={sort}
+                >
                     <option>Sort by...</option>
                     <option>Creation date</option>
                     <option>Deadline</option>
                 </select>
-                <select className='topSelect' id='categoryFilter' value={categoryFilter} onChange={filter}>
+                <select
+                    className='topSelect'
+                    id='categoryFilter'
+                    value={categoryFilter}
+                    onChange={filter}
+                >
                     <option>Select category filter...</option>
                     {categories.map((item) => (
                         <option key={item.id} value={item.name}>{item.name}</option>
@@ -230,7 +249,11 @@ export default function List({ data }) {
                         <div>
                             <div className='preview centered'>
                                 <div style={{fontWeight: 'bold'}}>Subtasks:</div>
-                                <button className='plusButton' title='Add subtask' onClick={addSubtask}>
+                                <button
+                                    className='plusButton'
+                                    title='Add subtask'
+                                    onClick={addSubtask}
+                                >
                                     <IconContext value={{size: '1.2em'}}>
                                         <IoAddCircleOutline/>
                                     </IconContext>
@@ -239,25 +262,46 @@ export default function List({ data }) {
                             <Subtasks taskId={previewItem.id} />
                         </div>
                     <div className='buttonContainer'>
-                        <button className='actionButton' title='Edit task' onClick={edit}>
+                        <button
+                            className='actionButton'
+                            title='Edit task'
+                            onClick={edit}
+                        >
                             <IconContext value={{size: '1.5em'}}>
                                 <IoCreateOutline/>
                             </IconContext>
                         </button>
-                        <button className='actionButton' title='Mark task as done' onClick={handleCheckOff}>
+                        <button
+                            className='actionButton'
+                            title='Mark task as done'
+                            onClick={handleCheckOff}
+                        >
                             <IconContext value={{size: '1.5em'}}>
                                 <IoCheckmarkCircleOutline/>
                             </IconContext>
                         </button>
-                        <button className='actionButton' title='Close preview' onClick={close}>
+                        <button
+                            className='actionButton'
+                            title='Close preview'
+                            onClick={close}
+                        >
                             <IconContext value={{size: '1.5em'}}>
                                 <IoCloseCircleOutline/>
                             </IconContext>
                         </button>
                     </div>
-                    <EditOverlay item={previewItem} action={() => setPreviewVisible(false)} isOverlayOpen={isEditOverlayOpen}
-                                 setIsOverlayOpen={setIsEditOverlayOpen} />
-                    <SubtaskOverlay taskId={previewItem.id} isOverlayOpen={isSubtaskOverlayOpen} setIsOverlayOpen={setIsSubtaskOverlayOpen} setSubtasks={setPreviewSubtasks}/>
+                    <EditOverlay
+                        item={previewItem}
+                        action={() => setPreviewVisible(false)}
+                        isOverlayOpen={isEditOverlayOpen}
+                        setIsOverlayOpen={setIsEditOverlayOpen}
+                    />
+                    <SubtaskOverlay
+                        taskId={previewItem.id}
+                        isOverlayOpen={isSubtaskOverlayOpen}
+                        setIsOverlayOpen={setIsSubtaskOverlayOpen}
+                        setSubtasks={setPreviewSubtasks}
+                    />
                 </div>
             </div>
         </div>
