@@ -15,6 +15,7 @@ export default function EditOverlay({ item, action, isOverlayOpen, setIsOverlayO
     useEffect(() => {
         setTitle(item.title);
         setCategory(item.category);
+        //should not be null
         setDeadline(item.deadline);
         setNotes(item.notes);
         if (item.deadline === null) {

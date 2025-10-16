@@ -64,6 +64,12 @@ export default function Longterm() {
             <p className='listTitle'>List of longterm tasks</p>
             <div className='listContent'>
                 <div className='listItemsContainer'>
+                    <div className='legend'>
+                        <div className='legendComponent'>Task</div>
+                        <div className='legendComponent'>Category</div>
+                        <div className='legendComponent'>Creation date</div>
+                        <div className='legendComponent'>Notes</div>
+                    </div>
                     {tasks.map((item, index) => (
                         <li key={index} className='longtermListItem' onClick={() => handleClick(index)} onMouseEnter={() => setHover(index)} onMouseLeave={() => setHover(-1)}>
                             <div className={`listItemComponent ${expanded === index ? 'expanded' : ''}`}>{item.title}</div>

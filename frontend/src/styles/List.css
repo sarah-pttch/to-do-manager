@@ -184,6 +184,33 @@
     border-radius: 5px;
     padding: 10px;
     justify-content: space-between;
+    cursor: pointer;
+
+    .listItemComponent {
+        flex: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &.expanded {
+            white-space: wrap;
+        }
+    }
+}
+
+.legend {
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(121, 167, 5, 1);
+    border-radius: 5px;
+    padding: 2px 10px 2px 10px;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .legendComponent {
+        flex: 1;
+        font-weight: bold;
+    }
 }
 
 .longtermListItem {
