@@ -17,10 +17,31 @@
     border-top-right-radius: 5px;
 }
 
+.innerSliderContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px 0 10px;
+
+    button {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        border-radius: 100%;
+        background-color: transparent;
+    }
+
+    .disabled {
+        cursor: default;
+        border: none;
+    }
+}
+
 .sliderContent {
     display: flex;
     flex-direction: row;
-    gap: 3px;
+    gap: 20px;
     padding: 16px 10px 16px 10px;
 }
 
@@ -33,6 +54,14 @@
 
     p {
         margin-bottom: 0;
+    }
+
+    &.visible {
+        display: block;
+    }
+
+    &.hidden {
+        display: none;
     }
 }
 
