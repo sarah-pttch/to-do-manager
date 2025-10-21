@@ -26,6 +26,11 @@ public class TaskController {
     }
 
     @GetMapping
+    public ResponseEntity<Iterable<TaskDto>> getAllTasks() {
+        return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
+    }
+
+    @GetMapping("/open")
     public ResponseEntity<Iterable<TaskDto>> getAllOpenTasks() {
         return new ResponseEntity<>(taskService.getAllOpenTasks(), HttpStatus.OK);
     }

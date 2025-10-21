@@ -4,7 +4,7 @@ import { taskService } from "../services/taskApi.jsx"
 export const useTaskStore = create((set) => ({
     tasks: [],
     fetchTasks: async () => {
-        const data = await taskService.getAll()
+        const data = await taskService.getOpen()
         set({ tasks: data.data })
     },
     addTask: (task) => {

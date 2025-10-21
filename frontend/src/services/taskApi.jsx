@@ -13,6 +13,7 @@ export const taskService = {
     create: (data) => api.post('', data),
     createLongterm: (data) => api.post('/longterm', data),
     getAll: () => api.get(''),
+    getOpen: () => api.get('/open'),
     getArchive: () => api.get('/completed'),
     getLongterm: () => api.get('/longterm'),
     update: (id, data) => api.put(`/${id}`, data),

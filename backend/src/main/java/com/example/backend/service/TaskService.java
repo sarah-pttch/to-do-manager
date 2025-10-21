@@ -37,9 +37,15 @@ public class TaskService {
         return TaskMapper.toDto(createdTask);
     }
 
-    public Iterable<TaskDto> getAllOpenTasks() {
-        Iterable<Task> allTasks = taskRepository.findAllByStatus("open");
+    public Iterable<TaskDto> getAllTasks() {
+        Iterable<Task> allTasks = taskRepository.findAll();
         return StreamSupport.stream(allTasks.spliterator(), false)
+                .map(TaskMapper::toDto).collect(Collectors.toList());
+    }
+
+    public Iterable<TaskDto> getAllOpenTasks() {
+        Iterable<Task> allOpenTasks = taskRepository.findAllByStatus("open");
+        return StreamSupport.stream(allOpenTasks.spliterator(), false)
                 .filter((task) -> task.getDeadline() != null)
                 .map(TaskMapper::toDto).collect(Collectors.toList());
     }
