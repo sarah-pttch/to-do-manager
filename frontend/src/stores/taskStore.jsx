@@ -27,5 +27,11 @@ export const useTaskStore = create((set) => ({
         set((state) => ({
             tasks: state.tasks.filter((task) => task.id !== taskId)
         }))
+    },
+    deleteTask: async (taskId) => {
+        await taskService.delete(taskId)
+        set((state) => ({
+            tasks: state.tasks.filter((task) => task.id !== taskId)
+        }))
     }
 }))

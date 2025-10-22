@@ -6,7 +6,8 @@ import {
     IoCloseCircleOutline,
     IoCreateOutline,
     IoAddCircleOutline,
-    IoCheckmarkSharp
+    IoCheckmarkSharp,
+    IoTrashOutline
 } from "react-icons/io5"
 import { IconContext } from "react-icons"
 import SubtaskOverlay from "./SubtaskOverlay.jsx"
@@ -29,6 +30,7 @@ export default function List({ data }) {
     const [isSubtaskOverlayOpen, setIsSubtaskOverlayOpen] = useState(false)
     const [subtasksLoading, setSubtasksLoading] = useState(false)
     const checkOffTask = useTaskStore((state) => state.checkOffTask)
+    const deleteTask = useTaskStore((state) => state.deleteTask)
     const categories = useCategoryStore((state) => state.categories)
 
     const retrieveData = async (taskId) => {
@@ -127,6 +129,14 @@ export default function List({ data }) {
             console.error("Error updating task: ", error)
         }
         setPreviewVisible(false);
+    }
+
+    const handleDelete = async () => {
+        try {
+            await deleteTask(previewItem.id)
+        } catch (error) {
+            console.error("Error deleting task: ", error)
+        }
     }
 
     const filter = (e) => {
@@ -278,6 +288,15 @@ export default function List({ data }) {
                         >
                             <IconContext value={{size: '1.5em'}}>
                                 <IoCheckmarkCircleOutline/>
+                            </IconContext>
+                        </button>
+                        <button
+                            className='actionButton'
+                            title='Delete task'
+                            onClick={handleDelete}
+                        >
+                            <IconContext value={{size: '1.5em'}}>
+                                <IoTrashOutline/>
                             </IconContext>
                         </button>
                         <button
