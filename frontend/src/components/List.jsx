@@ -54,7 +54,7 @@ export default function List({ data }) {
         const daysUntilDeadline = (deadline) => {
             const today = new Date()
             const taskDate = new Date(deadline)
-            return Math.round((taskDate - today) / 86400000)
+            return Math.round((taskDate - today) / 86400000) + 1
         }
 
         return (

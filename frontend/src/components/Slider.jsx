@@ -11,7 +11,7 @@ export default function Slider({ data }) {
     const daysUntilDeadline = (deadline) => {
         const today = new Date();
         const taskDate = new Date(deadline);
-        return (taskDate - today) / 86400000;
+        return Math.round((taskDate - today) / 86400000) + 1;
     }
 
     const deadlineSoon = (deadline) => {
@@ -33,14 +33,12 @@ export default function Slider({ data }) {
 
     const Slide = ({ index, dataItem, days }) => {
 
-        let nrDays = Math.round(days);
-
         return (
             <div className={`slideContainer ${currentSlide.includes(index) ? 'visible' : 'hidden'}`}>
                 <p className='slideTitle'>{dataItem.title}</p>
-                { nrDays === 1
-                    ? <p>Deadline in {nrDays} day</p>
-                    : <p className={nrDays < 0 ? 'red' : undefined}>Deadline in {nrDays} days</p>
+                { days === 1
+                    ? <p>Deadline in {days} day</p>
+                    : <p className={days < 0 ? 'red' : undefined}>Deadline in {days} days</p>
                 }
             </div>
         )
@@ -68,7 +66,7 @@ export default function Slider({ data }) {
                     ))}
                 </div>
                 <IconContext value={{size: '1.5em'}}>
-                    <button className={`${currentSlide.includes(filteredData.length - 1) ? 'disabled' : ''}`} onClick={handleForward} disabled={currentSlide.includes(filteredData.length - 1)}>
+                    <button className={`${filteredData.length === 0 || currentSlide.includes(filteredData.length - 1) ? 'disabled' : ''}`} onClick={handleForward} disabled={filteredData.length === 0 || currentSlide.includes(filteredData.length - 1)}>
                         <IoArrowForwardCircle />
                     </button>
                 </IconContext>

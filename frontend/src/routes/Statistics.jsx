@@ -27,10 +27,14 @@ export default function Statistics() {
             <div className='statisticsOverviewContainer'>
                 <div className='statisticContainer'>
                     <h3>Tasks completed</h3>
-                    <div className='percentage'>{Math.round(completedTasks.length / tasks.length * 100)}%</div>
+                    {tasks.length === 0 ? (
+                        <div className='percentage'>--%</div>
+                    ) : (
+                        <div className='percentage'>{Math.round(completedTasks.length / tasks.length * 100)}%</div>
+                    )}
                 </div>
                 <div className='statisticContainer'>
-                    <h3>Average time to task completion</h3>
+                <h3>Average time to task completion</h3>
                     {completedTasks.length === 0 ? (
                         <div className='percentage'>-- days</div>
                     ) : (
