@@ -229,14 +229,14 @@ export default function List({ data }) {
             <div className='listContent'>
                 <div className='listItemsContainer'>
                     {isProcessing ? (
-                        <div>Processing...</div>
+                        <div className='alternatives'>Processing...</div>
                     ) : (
                         listedData.length > 0 ? (
                             listedData.map((item, index) => (
                                 <ListItem key={index} dataItem={item}/>
                             ))
                         ) : (
-                            <div>No matches found</div>
+                            <div className='alternatives'>No matches found</div>
                         )
                     )}
                 </div>

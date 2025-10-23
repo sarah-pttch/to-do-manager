@@ -238,3 +238,8 @@
 .itemDeadline {
     margin-left: auto;
 }
+
+.alternatives {
+    padding-top: 10px;
+    align-self: center;
+}
