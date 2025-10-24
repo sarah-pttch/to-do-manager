@@ -8,7 +8,7 @@ import java.util.Objects;
 @Entity
 public class Task {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String status;
     private LocalDate creationDate;
