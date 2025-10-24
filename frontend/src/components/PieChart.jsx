@@ -5,7 +5,6 @@ Chart.register(ArcElement, Tooltip, Legend)
 
 export default function PieChart({ completedTasks }) {
 
-    console.log(completedTasks)
     const tasksPerCategory = completedTasks.reduce((acc, task) => {
         acc[task.category] = (acc[task.category] || 0) + 1
         return acc;
@@ -16,8 +15,6 @@ export default function PieChart({ completedTasks }) {
     const backgroundColors = labels.map((_, index) =>
         `hsl(${(index * 360) / labels.length}, 70%, 60%)`
     );
-
-    console.log(values)
 
     const data = {
         labels,

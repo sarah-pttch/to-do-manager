@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.Statistics;
 import com.example.backend.dto.TaskDto;
 import com.example.backend.dto.TaskMapper;
 import com.example.backend.entity.Task;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -78,5 +81,21 @@ public class TaskService {
 
     public void deleteTask(Integer id) {
         taskRepository.deleteById(id);
+    }
+
+    public Statistics getStatistics() {
+        Iterable<Task> allTasks = taskRepository.findAll();
+        Iterable<Task> allCompletedTasks = taskRepository.findAllByStatus("done");
+        Integer numberTasks = ((Collection<?>) allTasks).size();
+        Integer numberCompletedTasks = ((Collection<?>) allCompletedTasks).size();
+        Long totalDays = 0L;
+        Integer numberInTime = 0;
+        for (Task task : allCompletedTasks) {
+            totalDays += task.getCreationDate().until(task.getCompletionDate(), ChronoUnit.DAYS);
+            if (task.getCompletionDate().isBefore(task.getDeadline()) || task.getCompletionDate().isEqual(task.getDeadline())) {
+                numberInTime++;
+            }
+        }
+        return new Statistics(numberTasks, numberCompletedTasks, totalDays, numberInTime);
     }
 }

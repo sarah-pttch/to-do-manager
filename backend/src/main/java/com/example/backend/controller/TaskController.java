@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.Statistics;
 import com.example.backend.dto.TaskDto;
 import com.example.backend.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,10 @@ public class TaskController {
     public ResponseEntity<Void> deleteTask(@PathVariable Integer id) {
         taskService.deleteTask(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<Statistics> getStatistics() {
+        return new ResponseEntity<>(taskService.getStatistics(), HttpStatus.OK);
     }
 }

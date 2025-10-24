@@ -7,18 +7,16 @@ export default function Statistics() {
 
     const [tasks, setTasks] = useState([])
     const [completedTasks, setCompletedTasks] = useState([])
-    const [totalDays, setTotalDays] = useState(0)
+    const [statistics, setStatistics] = useState([])
     const retrieveData = async () => {
-        const taskData = await taskService.getAll()
-        setTasks(taskData.data)
-        setCompletedTasks(taskData.data.filter((task) => task.status === 'done'))
+        const retrievedStatistics = await taskService.getStatistics()
+        setStatistics(retrievedStatistics.data)
+        const completedTaskData = await taskService.getArchive()
+        setCompletedTasks(completedTaskData.data)
     }
 
-    useEffect(() => {
+    useEffect( () => {
         retrieveData()
-        setTotalDays(completedTasks.reduce((acc, task) => {
-            return acc + ((task.completionDate - task.creationDate) / 86400000)
-        }, 0))
     }, []);
 
     return (
@@ -27,18 +25,26 @@ export default function Statistics() {
             <div className='statisticsOverviewContainer'>
                 <div className='statisticContainer'>
                     <h3>Tasks completed</h3>
-                    {tasks.length === 0 ? (
+                    {statistics.numberTasks === 0 ? (
                         <div className='percentage'>--%</div>
                     ) : (
-                        <div className='percentage'>{Math.round(completedTasks.length / tasks.length * 100)}%</div>
+                        <div className='percentage'>{Math.round(statistics.numberCompletedTasks / statistics.numberTasks * 100)}%</div>
                     )}
                 </div>
                 <div className='statisticContainer'>
                 <h3>Average time to task completion</h3>
-                    {completedTasks.length === 0 ? (
+                    {statistics.numberCompletedTasks === 0 ? (
                         <div className='percentage'>-- days</div>
                     ) : (
-                        <div className='percentage'>{totalDays / completedTasks.length} days</div>
+                        <div className='percentage'>{statistics.totalDays / statistics.numberCompletedTasks} days</div>
+                    )}
+                </div>
+                <div className='statisticContainer'>
+                    <h3>Tasks completed in time</h3>
+                    {statistics.numberCompletedTasks === 0 ? (
+                        <div className='percentage'>--%</div>
+                    ) : (
+                        <div className='percentage'>{statistics.numberInTime / statistics.numberCompletedTasks * 100}%</div>
                     )}
                 </div>
             </div>

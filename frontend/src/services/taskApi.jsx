@@ -18,6 +18,7 @@ export const taskService = {
     getLongterm: () => api.get('/longterm'),
     update: (id, data) => api.put(`/${id}`, data),
     delete: (id) => api.delete(`/${id}`),
+    getStatistics: () => api.get('/statistics'),
 }
 
 export default api;
