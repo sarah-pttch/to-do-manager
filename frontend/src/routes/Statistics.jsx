@@ -44,7 +44,7 @@ export default function Statistics() {
                     {statistics.numberCompletedTasks === 0 ? (
                         <div className='percentage'>--%</div>
                     ) : (
-                        <div className='percentage'>{statistics.numberInTime / statistics.numberCompletedTasks * 100}%</div>
+                        <div className='percentage'>{Math.round(statistics.numberInTime / statistics.numberCompletedTasks * 100)}%</div>
                     )}
                 </div>
             </div>

@@ -2,9 +2,12 @@ import '../styles/Slider.css'
 import { useEffect, useState } from "react"
 import { IoArrowBackCircle, IoArrowForwardCircle } from "react-icons/io5"
 import { IconContext } from "react-icons";
+import { useWindowWidth } from "../hooks/useWindowWidth"
 
 export default function Slider({ data }) {
 
+    const width = useWindowWidth()
+    const [slideNumber, setSlideNumber] = useState(3)
     const [currentSlide, setCurrentSlide] = useState([0, 1, 2])
     const [filteredData, setFilteredData] = useState([])
 
@@ -20,16 +23,29 @@ export default function Slider({ data }) {
     }
 
     const handleBack = () => {
-        setCurrentSlide(currentSlide.map((index) => index - 3))
+        setCurrentSlide(currentSlide.map((index) => index - slideNumber))
     }
 
     const handleForward = () => {
-        setCurrentSlide(currentSlide.map((index) => index + 3))
+        setCurrentSlide(currentSlide.map((index) => index + slideNumber))
     }
 
     useEffect(() => {
         setFilteredData(data.filter(item => item && deadlineSoon(item.deadline)))
     }, [data]);
+
+    useEffect(() => {
+        if (width < 660) {
+            setCurrentSlide([currentSlide[0]])
+            setSlideNumber(1)
+        } else if (width < 950) {
+            setCurrentSlide([currentSlide[0], currentSlide[0] + 1])
+            setSlideNumber(2)
+        } else {
+            setCurrentSlide([currentSlide[0], currentSlide[0] + 1, currentSlide[0] + 2])
+            setSlideNumber(3)
+        }
+    }, [width]);
 
     const Slide = ({ index, dataItem, days }) => {
 
