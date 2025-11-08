@@ -130,7 +130,7 @@ export default function Longterm() {
                                             onClick={() => edit(index)}
                                         >
                                             <IconContext value={{size: '1.5em'}}>
-                                                <IoCreateOutline/>
+                                                <IoCreateOutline />
                                             </IconContext>
                                         </button>
                                         <button
@@ -139,7 +139,7 @@ export default function Longterm() {
                                             onClick={() => handleCheckOff(index)}
                                         >
                                             <IconContext value={{size: '1.5em'}}>
-                                                <IoCheckmarkCircleOutline/>
+                                                <IoCheckmarkCircleOutline />
                                             </IconContext>
                                         </button>
                                         <button
@@ -148,7 +148,7 @@ export default function Longterm() {
                                             onClick={() => handleDelete(index)}
                                         >
                                             <IconContext value={{size: '1.5em'}}>
-                                                <IoTrashOutline/>
+                                                <IoTrashOutline />
                                             </IconContext>
                                         </button>
                                     </div>

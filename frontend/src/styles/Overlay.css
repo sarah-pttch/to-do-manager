@@ -18,6 +18,7 @@
     background-color: white;
     border-radius: 5px;
     width: fit-content;
+    min-width: 200px;
     height: fit-content;
     position: fixed;
     padding: 0 20px 20px 20px;

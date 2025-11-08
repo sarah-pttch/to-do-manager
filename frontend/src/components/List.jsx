@@ -7,13 +7,15 @@ import {
     IoCreateOutline,
     IoAddCircleOutline,
     IoCheckmarkSharp,
-    IoTrashOutline
+    IoTrashOutline,
+    IoAlarmOutline
 } from "react-icons/io5"
 import { IconContext } from "react-icons"
 import SubtaskOverlay from "./SubtaskOverlay.jsx"
 import { subtaskService } from "../services/subtaskApi.jsx"
 import { useTaskStore } from "../stores/taskStore.jsx"
 import { useCategoryStore } from "../stores/categoryStore.jsx"
+import ReminderOverlay from "./ReminderOverlay.jsx";
 
 export default function List({ data }) {
 
@@ -28,6 +30,7 @@ export default function List({ data }) {
     const [previewSubtasks, setPreviewSubtasks] = useState([])
     const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false)
     const [isSubtaskOverlayOpen, setIsSubtaskOverlayOpen] = useState(false)
+    const [isReminderOverlayOpen, setIsReminderOverlayOpen] = useState(false)
     const [subtasksLoading, setSubtasksLoading] = useState(false)
     const checkOffTask = useTaskStore((state) => state.checkOffTask)
     const deleteTask = useTaskStore((state) => state.deleteTask)
@@ -109,6 +112,10 @@ export default function List({ data }) {
 
     const edit = () => {
         setIsEditOverlayOpen(!isEditOverlayOpen);
+    }
+
+    const setReminder = () => {
+        setIsReminderOverlayOpen(!isReminderOverlayOpen)
     }
 
     const addSubtask = () => {
@@ -278,7 +285,16 @@ export default function List({ data }) {
                             onClick={edit}
                         >
                             <IconContext value={{size: '1.5em'}}>
-                                <IoCreateOutline/>
+                                <IoCreateOutline />
+                            </IconContext>
+                        </button>
+                        <button
+                            className='actionButton'
+                            title='Set reminder'
+                            onClick={setReminder}
+                        >
+                            <IconContext value={{size: '1.5em'}}>
+                                <IoAlarmOutline />
                             </IconContext>
                         </button>
                         <button
@@ -287,7 +303,7 @@ export default function List({ data }) {
                             onClick={handleCheckOff}
                         >
                             <IconContext value={{size: '1.5em'}}>
-                                <IoCheckmarkCircleOutline/>
+                                <IoCheckmarkCircleOutline />
                             </IconContext>
                         </button>
                         <button
@@ -296,7 +312,7 @@ export default function List({ data }) {
                             onClick={handleDelete}
                         >
                             <IconContext value={{size: '1.5em'}}>
-                                <IoTrashOutline/>
+                                <IoTrashOutline />
                             </IconContext>
                         </button>
                         <button
@@ -305,7 +321,7 @@ export default function List({ data }) {
                             onClick={close}
                         >
                             <IconContext value={{size: '1.5em'}}>
-                                <IoCloseCircleOutline/>
+                                <IoCloseCircleOutline />
                             </IconContext>
                         </button>
                     </div>
@@ -320,6 +336,11 @@ export default function List({ data }) {
                         isOverlayOpen={isSubtaskOverlayOpen}
                         setIsOverlayOpen={setIsSubtaskOverlayOpen}
                         setSubtasks={setPreviewSubtasks}
+                    />
+                    <ReminderOverlay
+                        item={previewItem}
+                        isOverlayOpen={isReminderOverlayOpen}
+                        setIsOverlayOpen={setIsReminderOverlayOpen}
                     />
                 </div>
             </div>

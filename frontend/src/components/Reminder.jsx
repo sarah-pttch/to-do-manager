@@ -1,7 +1,16 @@
 import '../styles/Overlay.css'
 import ReactDOM from 'react-dom'
+import {useState} from "react";
+import { reminderService } from "../services/reminderApi"
 
-export default function Overlay({ isOpen, overlayTitle, buttonTitle, onClose, onSave, children }) {
+export default function Reminder({ reminder }) {
+
+    const [isOpen, setIsOpen] = useState(true)
+
+    const onClose = async () => {
+        setIsOpen(false)
+        reminderService.delete(reminder.id)
+    }
 
     return ReactDOM.createPortal(
         <>
@@ -9,13 +18,13 @@ export default function Overlay({ isOpen, overlayTitle, buttonTitle, onClose, on
                 <div className='overlayContainer'>
                     <div className='overlayBackground'></div>
                     <div className='overlay'>
-                        <p className='overlayTitle'>{overlayTitle}</p>
+                        <p className='overlayTitle'>!Reminder!</p>
                         <div className='overlayContent'>
-                            {children}
+                            <div>{reminder.taskTitle}</div>
+                            <div>The task is ending on ${reminder.taskDeadline}</div>
                         </div>
                         <div className='overlayButtons'>
-                            <button onClick={onClose}>Cancel</button>
-                            <button type='submit' onClick={onSave}>{buttonTitle}</button>
+                            <button onClick={onClose}>OK</button>
                         </div>
                     </div>
                 </div>

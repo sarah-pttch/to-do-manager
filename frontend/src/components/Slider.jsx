@@ -1,7 +1,7 @@
 import '../styles/Slider.css'
 import { useEffect, useState } from "react"
 import { IoArrowBackCircle, IoArrowForwardCircle } from "react-icons/io5"
-import { IconContext } from "react-icons";
+import { IconContext } from "react-icons"
 import { useWindowWidth } from "../hooks/useWindowWidth"
 
 export default function Slider({ data }) {
