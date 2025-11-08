@@ -15,11 +15,15 @@ export default function CategoryOverlay() {
             addCategory(category.data)
             setName('')
             setIsOverlayOpen(!isOverlayOpen)
-            // onAdd();
             alert("Category created successfully")
         } catch (error) {
             alert("Error creating category: " + error)
         }
+    }
+
+    const handleCancel = () => {
+        setIsOverlayOpen(!isOverlayOpen)
+        setName('')
     }
 
     return (
@@ -34,9 +38,7 @@ export default function CategoryOverlay() {
                 isOpen={isOverlayOpen}
                 overlayTitle={'Create a new category'}
                 buttonTitle={'Save'}
-                onClose={() => {
-                    setIsOverlayOpen(!isOverlayOpen)
-                }}
+                onClose={handleCancel}
                 onSave={handleSubmit}
             >
                 <label>Name: </label>

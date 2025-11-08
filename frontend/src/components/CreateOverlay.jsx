@@ -33,15 +33,22 @@ export default function CreateOverlay({ isOverlayOpen, setIsOverlayOpen }) {
         }
     }
 
+    const handleCancel = () => {
+        setIsOverlayOpen(!isOverlayOpen)
+        setTitle('')
+        setCategory('')
+        setDeadline('')
+        setNotes('')
+        setDeadlineDisabled(false)
+    }
+
     return (
         <>
             <Overlay
                 isOpen={isOverlayOpen}
                 overlayTitle={'Create a new task'}
                 buttonTitle={'Save'}
-                onClose={() => {
-                    setIsOverlayOpen(!isOverlayOpen)
-                }}
+                onClose={handleCancel}
                 onSave={handleSubmit}
             >
                 <label>Title: </label>

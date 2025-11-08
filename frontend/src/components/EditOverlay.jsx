@@ -51,15 +51,25 @@ export default function EditOverlay({ item, action, isOverlayOpen, setIsOverlayO
         }
     }
 
+    const handleCancel = () => {
+        setIsOverlayOpen(!isOverlayOpen)
+        setTitle(item.title);
+        setCategory(item.category);
+        //should not be null
+        setDeadline(item.deadline);
+        setNotes(item.notes);
+        if (item.deadline === null) {
+            setDeadlineDisabled(true);
+        }
+    }
+
     return (
         <>
             <Overlay
                 isOpen={isOverlayOpen}
                 overlayTitle={'Edit task'}
                 buttonTitle={'Save'}
-                onClose={() => {
-                    setIsOverlayOpen(!isOverlayOpen)
-                }}
+                onClose={handleCancel}
                 onSave={handleSubmit}
             >
                 <label>Title: </label>

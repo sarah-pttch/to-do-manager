@@ -17,15 +17,18 @@ export default function ReminderOverlay({ item, isOverlayOpen, setIsOverlayOpen 
         }
     }
 
+    const handleCancel = () => {
+        setIsOverlayOpen(!isOverlayOpen)
+        setReminderDate('')
+    }
+
     return (
         <>
             <Overlay
                 isOpen={isOverlayOpen}
                 overlayTitle={'Set up a reminder'}
                 buttonTitle={'Save'}
-                onClose={() => {
-                    setIsOverlayOpen(!isOverlayOpen)
-                }}
+                onClose={handleCancel}
                 onSave={handleSubmit}
             >
                 <label>Reminder date: </label>

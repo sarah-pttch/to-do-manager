@@ -18,15 +18,18 @@ export default function SubtaskOverlay({ taskId, isOverlayOpen, setIsOverlayOpen
         }
     }
 
+    const handleCancel = () => {
+        setIsOverlayOpen(!isOverlayOpen)
+        setDescription('')
+    }
+
     return (
         <>
             <Overlay
                 isOpen={isOverlayOpen}
                 overlayTitle={'Add a subtask'}
                 buttonTitle={'Save'}
-                onClose={() => {
-                    setIsOverlayOpen(!isOverlayOpen)
-                }}
+                onClose={handleCancel}
                 onSave={handleSubmit}
             >
                 <label>Description: </label>
