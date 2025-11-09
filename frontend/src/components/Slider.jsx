@@ -62,7 +62,7 @@ export default function Slider({ data }) {
 
     return (
         <div className='sliderContainer'>
-            <p className='sliderTitle'>Deadline ending soon</p>
+            <p className='sliderTitle'>Deadline is close...</p>
             <div className='innerSliderContainer'>
                 <IconContext value={{size: '1.5em'}}>
                     <button className={`${currentSlide.includes(0) ? 'disabled' : ''}`} onClick={handleBack} disabled={currentSlide.includes(0)}>

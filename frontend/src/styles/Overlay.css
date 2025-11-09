@@ -45,6 +45,9 @@
     flex-direction: row;
     justify-content: space-between;
 
+    &.center {
+        justify-content: center;
+    }
 
     button {
         background-color: aquamarine;
@@ -57,6 +60,10 @@
     gap: 3px;
     padding-top: 10px;
     padding-bottom: 20px;
+
+    &.center {
+        align-items: center;
+    }
 }
 
 .deadlineContainer {
@@ -75,4 +82,8 @@ input {
 
 textarea {
     margin: 1px;
+}
+
+.bold {
+    font-weight: bold;
 }

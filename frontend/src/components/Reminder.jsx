@@ -19,11 +19,13 @@ export default function Reminder({ reminder }) {
                     <div className='overlayBackground'></div>
                     <div className='overlay'>
                         <p className='overlayTitle'>!Reminder!</p>
-                        <div className='overlayContent'>
-                            <div>{reminder.taskTitle}</div>
-                            <div>The task is ending on ${reminder.taskDeadline}</div>
+                        <div className='overlayContent center'>
+                            <div>Don't forget this task:</div>
+                            <div className='bold'>{reminder.taskTitle}</div>
+                            <div>The task's deadline is on</div>
+                            <div className='bold'>{reminder.taskDeadline}</div>
                         </div>
-                        <div className='overlayButtons'>
+                        <div className='overlayButtons center'>
                             <button onClick={onClose}>OK</button>
                         </div>
                     </div>
