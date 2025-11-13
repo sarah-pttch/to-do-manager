@@ -1,59 +1,21 @@
 import "../styles/List.css"
 import {useEffect, useState} from "react"
-import EditOverlay from "./EditOverlay.jsx"
-import {
-    IoCheckmarkCircleOutline,
-    IoCloseCircleOutline,
-    IoCreateOutline,
-    IoAddCircleOutline,
-    IoCheckmarkSharp,
-    IoTrashOutline,
-    IoAlarmOutline
-} from "react-icons/io5"
-import { IconContext } from "react-icons"
-import SubtaskOverlay from "./SubtaskOverlay.jsx"
-import { subtaskService } from "../services/subtaskApi.jsx"
-import { useTaskStore } from "../stores/taskStore.jsx"
 import { useCategoryStore } from "../stores/categoryStore.jsx"
-import ReminderOverlay from "./ReminderOverlay.jsx";
 
-export default function List({ data }) {
+export default function List({ data, setSelectedTask, openDetails }) {
 
     const [listedData, setListedData] = useState([])
     const [filterActive, setFilterActive] = useState(false)
     const [categoryFilter, setCategoryFilter] = useState('')
-    // const [sortActive, setSortActive] = useState(false)
     const [sorting, setSorting] = useState('')
     const [isProcessing, setIsProcessing] = useState(false)
-    const [previewVisible, setPreviewVisible] = useState(false)
-    const [previewItem, setPreviewItem] = useState([])
-    const [previewSubtasks, setPreviewSubtasks] = useState([])
-    const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false)
-    const [isSubtaskOverlayOpen, setIsSubtaskOverlayOpen] = useState(false)
-    const [isReminderOverlayOpen, setIsReminderOverlayOpen] = useState(false)
-    const [subtasksLoading, setSubtasksLoading] = useState(false)
-    const checkOffTask = useTaskStore((state) => state.checkOffTask)
-    const deleteTask = useTaskStore((state) => state.deleteTask)
     const categories = useCategoryStore((state) => state.categories)
-
-    const retrieveData = async (taskId) => {
-        setSubtasksLoading(true)
-        try {
-            const subtasksData = await subtaskService.getAllByTaskId(taskId)
-            setPreviewSubtasks(subtasksData.data)
-        } catch (error) {
-            console.error("No subtasks for this task", error)
-        } finally {
-            setSubtasksLoading(false)
-        }
-    }
 
     const ListItem = ({ dataItem }) => {
 
         const handleClick = (dataItem) => {
-            setPreviewVisible(true)
-            setPreviewItem(dataItem)
-            retrieveData(dataItem.id)
+            openDetails(true)
+            setSelectedTask(dataItem)
         }
 
         const daysUntilDeadline = (deadline) => {
@@ -72,80 +34,6 @@ export default function List({ data }) {
         )
     }
 
-    const Subtasks = () => {
-
-        const handleSubtaskCheckoff = async (subtaskId) => {
-            await subtaskService.checkOffSubtask(subtaskId)
-            retrieveData(previewItem.id)
-        }
-
-        return (
-            <div className='subtasksContainer'>
-                {subtasksLoading ? (
-                    <div>Loading subtasks...</div>
-                ) : (
-                    previewSubtasks.length > 0 && previewSubtasks.map((subtask) => (
-                        <div className='subtaskItem'>
-                            <button
-                                className={`${subtask.status === 'open' ? 'subtaskButton' : 'subtaskButtonDone'}`}
-                                disabled={subtask.status !== 'open'}
-                                title='Mark subtask as done'
-                                onClick={() => handleSubtaskCheckoff(subtask.id)}
-                            >
-                                <IconContext value={{size: '1em'}}>
-                                    <IoCheckmarkSharp/>
-                                </IconContext>
-                            </button>
-                            <div className={`${subtask.status === 'open' ? '' : 'crossedOut'}`}>
-                                {subtask.description}
-                            </div>
-                        </div>
-                    ))
-                )}
-            </div>
-        )
-    }
-
-    const close = () => {
-        setPreviewVisible(false);
-    }
-
-    const edit = () => {
-        setIsEditOverlayOpen(!isEditOverlayOpen);
-    }
-
-    const setReminder = () => {
-        setIsReminderOverlayOpen(!isReminderOverlayOpen)
-    }
-
-    const addSubtask = () => {
-        setIsSubtaskOverlayOpen(!isSubtaskOverlayOpen)
-    }
-
-    const handleCheckOff = async () => {
-        try {
-            await checkOffTask(previewItem.id, {
-                status: "done",
-                creationDate: previewItem.creationDate,
-                title: previewItem.title,
-                category: previewItem.category,
-                deadline: previewItem.deadline,
-                notes: previewItem.notes
-            });
-        } catch(error) {
-            console.error("Error updating task: ", error)
-        }
-        setPreviewVisible(false);
-    }
-
-    const handleDelete = async () => {
-        try {
-            await deleteTask(previewItem.id)
-        } catch (error) {
-            console.error("Error deleting task: ", error)
-        }
-    }
-
     const filter = (e) => {
         setIsProcessing(true)
         setSorting('')
@@ -158,9 +46,6 @@ export default function List({ data }) {
             setListedData(data.filter((item) => item.category === e.target.value))
             setFilterActive(true)
         }
-        // if (sortActive) {
-        //     sortData()
-        // }
         setIsProcessing(false)
     }
 
@@ -168,10 +53,8 @@ export default function List({ data }) {
         setIsProcessing(true)
         if (e.target.value === 'Sort by...') {
             setSorting('')
-            // setSortActive(false)
         } else {
             setSorting(e.target.value)
-            // setSortActive(true)
             if (e.target.value === 'Deadline') {
                 setListedData(listedData.sort((a, b) => new Date(a.deadline) - new Date(b.deadline)))
             } else {
@@ -181,23 +64,12 @@ export default function List({ data }) {
         setIsProcessing(false)
     }
 
-    // const sortData = () => {
-    //     if (sorting === 'Deadline') {
-    //         setListedData(listedData.sort((a, b) => new Date(a.deadline) - new Date(b.deadline)))
-    //     } else {
-    //         setListedData(listedData.sort((a, b) => new Date(a.creationDate) - new Date(b.creationDate)))
-    //     }
-    // }
-
     useEffect(() => {
         setListedData(data)
         setSorting('')
         if (filterActive) {
             setListedData(data.filter((item) => item.category === categoryFilter))
         }
-        // if (sortActive) {
-        //     sortData()
-        // }
     }, [data]);
 
     if (data.length === 0) return (
@@ -232,7 +104,7 @@ export default function List({ data }) {
                     ))}
                 </select>
             </div>
-            <p className='listTitle'>List of tasks</p>
+            <p className='listTitle'>List of Tasks</p>
             <div className='listContent'>
                 <div className='listItemsContainer'>
                     {isProcessing ? (
@@ -246,102 +118,6 @@ export default function List({ data }) {
                             <div className='alternatives'>No matches found</div>
                         )
                     )}
-                </div>
-                <div className={`previewContainer ${previewVisible ? 'visible' : 'hidden'}`}>
-                    <p className='previewTitle'>{previewItem.title}</p>
-                    <div className='preview'>
-                        <div style={{ fontWeight: 'bold'}}>Category:</div>
-                        <div>{previewItem.category}</div>
-                    </div>
-                    <div className='preview'>
-                        <div style={{ fontWeight: 'bold'}}>Deadline:</div>
-                        <div>{previewItem.deadline}</div>
-                    </div>
-                    {previewItem.notes !== '' &&
-                        <div className='preview'>
-                            <div style={{ fontWeight: 'bold'}}>Notes:</div>
-                            <div>{previewItem.notes}</div>
-                        </div>
-                    }
-                        <div>
-                            <div className='preview centered'>
-                                <div style={{fontWeight: 'bold'}}>Subtasks:</div>
-                                <button
-                                    className='plusButton'
-                                    title='Add subtask'
-                                    onClick={addSubtask}
-                                >
-                                    <IconContext value={{size: '1.2em'}}>
-                                        <IoAddCircleOutline/>
-                                    </IconContext>
-                                </button>
-                            </div>
-                            <Subtasks taskId={previewItem.id} />
-                        </div>
-                    <div className='buttonContainer'>
-                        <button
-                            className='actionButton'
-                            title='Edit task'
-                            onClick={edit}
-                        >
-                            <IconContext value={{size: '1.5em'}}>
-                                <IoCreateOutline />
-                            </IconContext>
-                        </button>
-                        <button
-                            className='actionButton'
-                            title='Set reminder'
-                            onClick={setReminder}
-                        >
-                            <IconContext value={{size: '1.5em'}}>
-                                <IoAlarmOutline />
-                            </IconContext>
-                        </button>
-                        <button
-                            className='actionButton'
-                            title='Mark task as done'
-                            onClick={handleCheckOff}
-                        >
-                            <IconContext value={{size: '1.5em'}}>
-                                <IoCheckmarkCircleOutline />
-                            </IconContext>
-                        </button>
-                        <button
-                            className='actionButton'
-                            title='Delete task'
-                            onClick={handleDelete}
-                        >
-                            <IconContext value={{size: '1.5em'}}>
-                                <IoTrashOutline />
-                            </IconContext>
-                        </button>
-                        <button
-                            className='actionButton'
-                            title='Close preview'
-                            onClick={close}
-                        >
-                            <IconContext value={{size: '1.5em'}}>
-                                <IoCloseCircleOutline />
-                            </IconContext>
-                        </button>
-                    </div>
-                    <EditOverlay
-                        item={previewItem}
-                        action={() => setPreviewVisible(false)}
-                        isOverlayOpen={isEditOverlayOpen}
-                        setIsOverlayOpen={setIsEditOverlayOpen}
-                    />
-                    <SubtaskOverlay
-                        taskId={previewItem.id}
-                        isOverlayOpen={isSubtaskOverlayOpen}
-                        setIsOverlayOpen={setIsSubtaskOverlayOpen}
-                        setSubtasks={setPreviewSubtasks}
-                    />
-                    <ReminderOverlay
-                        item={previewItem}
-                        isOverlayOpen={isReminderOverlayOpen}
-                        setIsOverlayOpen={setIsReminderOverlayOpen}
-                    />
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@ import { IoArrowBackCircle, IoArrowForwardCircle } from "react-icons/io5"
 import { IconContext } from "react-icons"
 import { useWindowWidth } from "../hooks/useWindowWidth"
 
-export default function Slider({ data }) {
+export default function Slider({ data, setSelectedTask, openDetails }) {
 
     const width = useWindowWidth()
     const [slideNumber, setSlideNumber] = useState(3)

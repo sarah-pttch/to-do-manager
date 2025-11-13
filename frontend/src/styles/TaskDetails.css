@@ -1,0 +1,116 @@
+.detailsContainer {
+    flex: 1;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: rgba(121, 167, 5, .5);
+
+    &.hidden {
+        display: none;
+    }
+
+    &.visible {
+        display: flex;
+    }
+}
+
+.detailsTitle {
+    background-color: rgba(121, 167, 5, 1);
+    font-weight: bold;
+    padding: 2px 2px 2px 4px;
+    margin: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.detailsContent {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 10px;
+    padding: 10px;
+}
+
+.taskTitle {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+    width: calc(100% - 200px);
+}
+
+.detail {
+    margin: 0;
+    display: flex;
+    gap: 4px;
+
+    &.centered {
+        align-items: center;
+    }
+}
+
+.subtasksContainer {
+    padding-left: 20px;
+}
+
+.subtaskItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+.actionButton {
+    background-color: rgba(121, 167, 5, 1);
+    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+    padding: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subtaskButton {
+    background-color: rgba(121, 167, 5, 1);
+    border-radius: 5px;
+    height: 18px;
+    width: 18px;
+    padding: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subtaskButtonDone {
+    background-color: rgba(121, 167, 5, 0.3);
+    border-radius: 5px;
+    height: 18px;
+    width: 18px;
+    padding: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.crossedOut {
+    text-decoration: line-through;
+}
+
+.plusButton {
+    background-color: transparent;
+    border-radius: 5px;
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

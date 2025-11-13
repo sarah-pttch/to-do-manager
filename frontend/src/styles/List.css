@@ -1,10 +1,9 @@
 .listContainer {
-    width: 90vw;
+    flex: 1;
     position: relative;
     height: fit-content;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
     border-radius: 5px;
     background-color: rgba(121, 167, 5, .5);
     z-index: 1;
@@ -34,109 +33,6 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
-}
-
-.previewContainer {
-    flex: 1;
-    flex-direction: column;
-    position: relative;
-    gap: 10px;
-    border: darkgreen 2px solid;
-    border-radius: 5px;
-    padding: 10px;
-
-    &.hidden {
-        display: none;
-    }
-
-    &.visible {
-        display: flex;
-    }
-}
-
-.previewTitle {
-    margin: 0;
-    font-weight: bold;
-    font-size: 1.5rem;
-    width: calc(100% - 200px);
-}
-
-.preview {
-    margin: 0;
-    display: flex;
-    gap: 4px;
-
-    &.centered {
-        align-items: center;
-    }
-}
-
-.subtasksContainer {
-    padding-left: 20px;
-}
-
-.subtaskItem {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 4px;
-}
-
-.actionButton {
-    background-color: rgba(121, 167, 5, 1);
-    border-radius: 5px;
-    height: 30px;
-    width: 30px;
-    padding: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.subtaskButton {
-    background-color: rgba(121, 167, 5, 1);
-    border-radius: 5px;
-    height: 18px;
-    width: 18px;
-    padding: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.subtaskButtonDone {
-    background-color: rgba(121, 167, 5, 0.3);
-    border-radius: 5px;
-    height: 18px;
-    width: 18px;
-    padding: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-}
-
-.crossedOut {
-    text-decoration: line-through;
-}
-
-.plusButton {
-    background-color: transparent;
-    border-radius: 5px;
-    height: 20px;
-    width: 20px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.buttonContainer {
-    display: flex;
-    gap: 10px;
-    position: absolute;
-    right: 10px;
-    top: 10px;
 }
 
 .selectContainer {
