@@ -86,11 +86,14 @@ public class TaskService {
     public Statistics getStatistics() {
         Iterable<Task> allTasks = taskRepository.findAll();
         Iterable<Task> allCompletedTasks = taskRepository.findAllByStatus("done");
+        Iterable<Task> allCompletedDeadlineTasks = StreamSupport.stream(allCompletedTasks.spliterator(), false)
+                .filter((task) -> task.getDeadline() != null)
+                .collect(Collectors.toList());
         Integer numberTasks = ((Collection<?>) allTasks).size();
         Integer numberCompletedTasks = ((Collection<?>) allCompletedTasks).size();
         Long totalDays = 0L;
         Integer numberInTime = 0;
-        for (Task task : allCompletedTasks) {
+        for (Task task : allCompletedDeadlineTasks) {
             totalDays += task.getCreationDate().until(task.getCompletionDate(), ChronoUnit.DAYS);
             if (task.getCompletionDate().isBefore(task.getDeadline()) || task.getCompletionDate().isEqual(task.getDeadline())) {
                 numberInTime++;

@@ -20,7 +20,7 @@ export default function Statistics() {
     }, []);
 
     return (
-        <div>
+        <div className='container'>
             <h1>Statistics</h1>
             <div className='statisticsOverviewContainer'>
                 <div className='statisticContainer'>
@@ -32,7 +32,8 @@ export default function Statistics() {
                     )}
                 </div>
                 <div className='statisticContainer'>
-                <h3>Average time to task completion</h3>
+                    <h3>Average time to task completion</h3>
+                    <div className='comment'>(Only tasks with deadline)</div>
                     {statistics.numberCompletedTasks === 0 ? (
                         <div className='percentage'>-- days</div>
                     ) : (
@@ -48,7 +49,10 @@ export default function Statistics() {
                     )}
                 </div>
             </div>
-            <PieChart completedTasks={completedTasks} />
+            <div className='statisticContainer'>
+                <h3>Completed tasks by category</h3>
+                <PieChart completedTasks={completedTasks}/>
+            </div>
         </div>
     )
 }
