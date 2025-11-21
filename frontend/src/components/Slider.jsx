@@ -49,8 +49,13 @@ export default function Slider({ data, setSelectedTask, openDetails }) {
 
     const Slide = ({ index, dataItem, days }) => {
 
+        const handleClick = (dataItem) => {
+            openDetails(true)
+            setSelectedTask(dataItem)
+        }
+
         return (
-            <div className={`slideContainer ${currentSlide.includes(index) ? 'visible' : 'hidden'}`}>
+            <div className={`slideContainer ${currentSlide.includes(index) ? 'visible' : 'hidden'}`} onClick={() => handleClick(dataItem)}>
                 <p className='slideTitle'>{dataItem.title}</p>
                 { days === 1
                     ? <p>Deadline in {days} day</p>
