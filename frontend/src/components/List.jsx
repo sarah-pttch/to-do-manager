@@ -26,8 +26,8 @@ export default function List({ data, setSelectedTask, openDetails }) {
 
         return (
             <li className='listItem' onClick={() => handleClick(dataItem)}>
-                <div>{dataItem.title}</div>
-                <div className='itemDeadline'>
+                <div className='listItemComponent'>{dataItem.title}</div>
+                <div className='listItemComponent itemDeadline'>
                     {dataItem.deadline} ({daysUntilDeadline(dataItem.deadline)} days left)
                 </div>
             </li>

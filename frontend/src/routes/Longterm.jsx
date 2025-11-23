@@ -85,7 +85,7 @@ export default function Longterm() {
     }
 
     return (
-        <div className='listContainer'>
+        <div className='listContainer space'>
             <p className='listTitle'>List of longterm tasks</p>
             <div className='selectContainer'>
                 <select

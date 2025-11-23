@@ -24,7 +24,7 @@ export default function Archive() {
     }
 
     return (
-        <div className='listContainer'>
+        <div className='listContainer space'>
             <p className='listTitle'>List of completed tasks</p>
             <div className='listContent'>
                 <div className='listItemsContainer'>

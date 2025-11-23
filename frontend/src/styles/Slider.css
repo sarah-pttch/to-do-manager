@@ -5,11 +5,11 @@
     margin-right: auto;
     margin-top: 20px;
     border-radius: 5px;
-    background-color: rgba(226, 161, 7, .5);
+    background-color: rgba(121, 167, 5, .5);
 }
 
 .sliderTitle {
-    background-color: rgba(226, 161, 7, 1);
+    background-color: rgba(121, 167, 5, 1);
     font-weight: bold;
     padding: 2px 2px 2px 4px;
     margin: 0;
@@ -52,13 +52,15 @@
     padding: 20px;
     margin: auto;
     cursor: pointer;
+    flex-direction: column;
+    align-items: center;
 
     p {
         margin-bottom: 0;
     }
 
     &.visible {
-        display: block;
+        display: flex;
     }
 
     &.hidden {
