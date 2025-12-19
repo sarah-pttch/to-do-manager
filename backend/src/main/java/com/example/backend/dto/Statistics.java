@@ -4,5 +4,6 @@ public record Statistics(
     Integer numberTasks,
     Integer numberCompletedTasks,
     Long totalDays,
-    Integer numberInTime
+    Integer numberInTime,
+    Double averageDaysSurpassed
 ) {}

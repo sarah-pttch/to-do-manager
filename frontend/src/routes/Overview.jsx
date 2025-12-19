@@ -10,7 +10,6 @@ import TaskDetails from "../components/TaskDetails.jsx";
 export default function Overview() {
 
     const tasks = useTaskStore((state) => state.tasks)
-    const fetchTasks = useTaskStore((state) => state.fetchTasks)
     const [reminders, setReminders] = useState([])
     const retrieveData = async () => {
         try {
@@ -24,7 +23,6 @@ export default function Overview() {
     const [detailsVisible, setDetailsVisible] = useState(false)
 
     useEffect(() => {
-        fetchTasks()
         retrieveData()
     }, []);
 

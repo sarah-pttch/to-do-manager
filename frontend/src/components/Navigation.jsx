@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import CreateOverlay from "./CreateOverlay"
 import { useCategoryStore } from "../stores/categoryStore"
+import {useTaskStore} from "../stores/taskStore.jsx";
 
 export default function Navigation() {
 
@@ -30,9 +31,11 @@ export default function Navigation() {
     }
 
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const fetchTasks = useTaskStore((state) => state.fetchTasks)
     const fetchCategories = useCategoryStore((state) => state.fetchCategories)
 
     useEffect(() => {
+        fetchTasks();
         fetchCategories();
     }, []);
 

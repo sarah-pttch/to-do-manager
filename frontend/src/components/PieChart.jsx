@@ -3,9 +3,9 @@ import { Pie } from 'react-chartjs-2'
 
 Chart.register(ArcElement, Tooltip, Legend)
 
-export default function PieChart({ completedTasks }) {
+export default function PieChart({ tasks, label }) {
 
-    const tasksPerCategory = completedTasks.reduce((acc, task) => {
+    const tasksPerCategory = tasks.reduce((acc, task) => {
         acc[task.category] = (acc[task.category] || 0) + 1
         return acc;
     }, {})
@@ -20,7 +20,7 @@ export default function PieChart({ completedTasks }) {
         labels,
             datasets: [
             {
-                label: 'Completed tasks per category',
+                label: label,
                 data: values,
                 backgroundColor: backgroundColors,
                 borderWidth: 1

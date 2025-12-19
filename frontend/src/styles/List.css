@@ -10,7 +10,7 @@
 
     &.space {
         width: 90vw;
-        margin-top: 20px;
+        margin-top: 10px;
     }
 }
 
@@ -32,7 +32,7 @@
 
 .listItemsContainer {
     flex: 1;
-    max-height: 300px;
+    max-height: 250px;
     height: fit-content;
     overflow: auto;
     display: flex;

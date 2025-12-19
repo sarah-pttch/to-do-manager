@@ -29,7 +29,7 @@
 }
 
 .overlayTitle {
-    background-color: rgba(226, 161, 7, .5);
+    background-color: rgba(238, 196, 98, 1);
     width: calc(100% + 35px);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -50,7 +50,7 @@
     }
 
     button {
-        background-color: rgba(226, 161, 7, .5);
+        background-color: rgba(238, 196, 98, 1);
     }
 }
 
