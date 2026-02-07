@@ -15,8 +15,9 @@ import { useEffect, useState } from "react"
 import { useTaskStore } from "../stores/taskStore"
 import { subtaskService } from "../services/subtaskApi"
 
-export default function TaskDetails({ task, visible, setVisible }) {
+export default function TaskDetails({ taskId, visible, setVisible }) {
 
+    const [task, setTask] = useState([])
     const [previewSubtasks, setPreviewSubtasks] = useState([])
     const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false)
     const [isSubtaskOverlayOpen, setIsSubtaskOverlayOpen] = useState(false)
@@ -24,6 +25,11 @@ export default function TaskDetails({ task, visible, setVisible }) {
     const [subtasksLoading, setSubtasksLoading] = useState(false)
     const checkOffTask = useTaskStore((state) => state.checkOffTask)
     const deleteTask = useTaskStore((state) => state.deleteTask)
+    const tasks = useTaskStore((state) => state.tasks)
+
+    const updateTask = async () => {
+        await setTask(tasks.find((task) => task.id === taskId))
+    }
 
     const retrieveData = async (taskId) => {
         setSubtasksLoading(true)
@@ -41,7 +47,7 @@ export default function TaskDetails({ task, visible, setVisible }) {
 
         const handleSubtaskCheckoff = async (subtaskId) => {
             await subtaskService.checkOffSubtask(subtaskId)
-            await retrieveData(task.id) //necessary??
+            await retrieveData(taskId) //necessary??
         }
 
         return (
@@ -50,7 +56,7 @@ export default function TaskDetails({ task, visible, setVisible }) {
                     <div>Loading subtasks...</div>
                 ) : (
                     previewSubtasks.length > 0 && previewSubtasks.map((subtask) => (
-                        <div key={subtask} className='subtaskItem'>
+                        <div key={subtask.id} className='subtaskItem'>
                             <button
                                 className={`${subtask.status === 'open' ? 'subtaskButton' : 'subtaskButtonDone'}`}
                                 disabled={subtask.status !== 'open'}
@@ -112,8 +118,17 @@ export default function TaskDetails({ task, visible, setVisible }) {
     }
 
     useEffect(() => {
-            retrieveData(task.id)
-    }, [task]);
+        if (taskId !== -1) {
+            updateTask()
+            retrieveData(taskId)
+        }
+    }, [taskId]);
+
+    useEffect(() => {
+        if (taskId !== -1) {
+            updateTask()
+        }
+    }, [tasks]);
 
     return (
         <div className={`detailsContainer ${visible ? 'visible' : 'hidden'}`}>
@@ -198,7 +213,6 @@ export default function TaskDetails({ task, visible, setVisible }) {
                 </div>
                 <EditOverlay
                     item={task}
-                    action={() => setVisible(false)}
                     isOverlayOpen={isEditOverlayOpen}
                     setIsOverlayOpen={setIsEditOverlayOpen}
                 />

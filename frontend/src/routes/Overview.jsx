@@ -19,7 +19,7 @@ export default function Overview() {
             console.error("Reminders could not be loaded", error)
         }
     }
-    const [selectedTask, setSelectedTask] = useState([])
+    const [selectedTask, setSelectedTask] = useState(-1)
     const [detailsVisible, setDetailsVisible] = useState(false)
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export default function Overview() {
             <Slider data={tasks} setSelectedTask={setSelectedTask} openDetails={setDetailsVisible} />
             <div className='container'>
                 <List data={tasks} setSelectedTask={setSelectedTask} openDetails={setDetailsVisible} />
-                <TaskDetails task={selectedTask} visible={detailsVisible} setVisible={setDetailsVisible} />
+                <TaskDetails taskId={selectedTask} visible={detailsVisible} setVisible={setDetailsVisible} />
             </div>
             {reminders.map(reminder => (
                     <Reminder reminder={reminder} />

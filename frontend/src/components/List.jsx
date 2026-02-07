@@ -14,8 +14,8 @@ export default function List({ data, setSelectedTask, openDetails }) {
     const ListItem = ({ dataItem }) => {
 
         const handleClick = (dataItem) => {
+            setSelectedTask(dataItem.id)
             openDetails(true)
-            setSelectedTask(dataItem)
         }
 
         const daysUntilDeadline = (deadline) => {

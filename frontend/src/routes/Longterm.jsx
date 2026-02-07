@@ -162,7 +162,6 @@ export default function Longterm() {
             </div>
             <EditOverlay
                 item={editTask}
-                action={retrieveData}
                 isOverlayOpen={isEditOverlayOpen}
                 setIsOverlayOpen={setIsEditOverlayOpen}
             />

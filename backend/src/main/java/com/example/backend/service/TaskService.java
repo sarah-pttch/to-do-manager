@@ -64,7 +64,7 @@ public class TaskService {
                 .map(TaskMapper::toDto).collect(Collectors.toList());
     }
 
-    // retrieves all longterm tasks without deadline
+    // retrieves all longterm tasks (without deadline)
     public Iterable<TaskDto> getAllLongtermTasks() {
         Iterable<Task> allLongtermTasks = taskRepository.findAllByStatusAndDeadline("open", null);
         return StreamSupport.stream(allLongtermTasks.spliterator(), false)
@@ -78,12 +78,10 @@ public class TaskService {
         }
         Task inputTask = TaskMapper.toEntity(taskDto);
         Optional<Task> tempTask = taskRepository.findById(id);
-        if(tempTask.isEmpty()) {
-            return TaskMapper.toDto(taskRepository.save(inputTask));
-        } else {
+        if (tempTask.isPresent()) {
             inputTask.setId(id);
-            return TaskMapper.toDto(taskRepository.save(inputTask));
         }
+        return TaskMapper.toDto(taskRepository.save(inputTask));
     }
 
     // deletes a task

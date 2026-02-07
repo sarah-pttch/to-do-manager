@@ -3,7 +3,7 @@ import Overlay from './Overlay.jsx'
 import { useTaskStore } from "../stores/taskStore.jsx"
 import { useCategoryStore } from "../stores/categoryStore.jsx"
 
-export default function EditOverlay({ item, action, isOverlayOpen, setIsOverlayOpen }) {
+export default function EditOverlay({ item, isOverlayOpen, setIsOverlayOpen }) {
     const [title, setTitle] = useState('')
     const [category, setCategory] = useState('')
     const [deadline, setDeadline] = useState('')
@@ -44,7 +44,6 @@ export default function EditOverlay({ item, action, isOverlayOpen, setIsOverlayO
             setNotes('')
             setDeadlineDisabled(false)
             setIsOverlayOpen(!isOverlayOpen)
-            action()
             alert("Task updated successfully")
         } catch(error) {
             alert("Error updating task: " + error)
