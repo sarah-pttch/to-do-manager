@@ -50,8 +50,8 @@ export default function Slider({ data, setSelectedTask, openDetails }) {
     const Slide = ({ index, dataItem, days }) => {
 
         const handleClick = (dataItem) => {
+            setSelectedTask(dataItem.id)
             openDetails(true)
-            setSelectedTask(dataItem)
         }
 
         return (
